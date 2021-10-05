@@ -19,7 +19,7 @@ HTTP_STATUS_OK = 200
 
 PARAMS = {
     "f": "json",
-    "returnGeometry": True,
+    "returnGeometry": "true",
     "spatialRel": "esriSpatialRelIntersects",
     "geometry": """{
     "xmin": 100000,
