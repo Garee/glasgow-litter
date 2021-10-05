@@ -14,6 +14,12 @@ Create a virtual environment:
 python -m venv venv
 ```
 
+Use the virtual environment:
+
+```bash
+./venv/Scripts/activate
+```
+
 Download and install the required python packages:
 
 ```bash
