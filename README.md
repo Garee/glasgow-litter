@@ -5,13 +5,20 @@ A project that explores the relationship between deprivation and litter in Glasg
 ## Dependencies
 
 1. [Python 3](https://www.python.org/downloads)
+2. [Node.js 14.X](https://nodejs.org/en/download)
 
 ## Quick Start
 
-Create a virtual environment:
+Install NPM packages:
 
 ```bash
-python -m venv venv
+npm install
+```
+
+Create a virtual environment and and install the required python packages:
+
+```bash
+npm run py-install
 ```
 
 Use the virtual environment:
@@ -20,22 +27,16 @@ Use the virtual environment:
 source venv/Scripts/activate
 ```
 
-Download and install the required python packages:
-
-```bash
-pip install -r requirements.txt
-```
-
 Lint the code:
 
 ```bash
-pylint **/*.py
+npm run lint
 ```
 
 Format the code:
 
 ```bash
-black .
+npm run format
 ```
 
 ## Data
