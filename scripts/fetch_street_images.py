@@ -11,8 +11,8 @@ load_dotenv()
 API_URL = "https://maps.googleapis.com/maps/api/streetview"
 API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
-IMG_WIDTH = 600
-IMG_HEIGHT = 600
+IMG_WIDTH = 800
+IMG_HEIGHT = 800
 RADIUS = 50
 FOV = 90
 PITCH = 0

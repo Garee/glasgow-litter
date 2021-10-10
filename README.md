@@ -2,6 +2,10 @@
 
 A project that explores the relationship between deprivation and litter in Glasgow City.
 
+## Objective
+
+Identify the relationship, if any, between an area of Glasgow's deprivation and the amount of litter present on its streets.
+
 ## Dependencies
 
 1. [Python 3](https://www.python.org/downloads)
