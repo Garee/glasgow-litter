@@ -1,8 +1,8 @@
 # Data
 
-This document describes the data sources that have been used for the project.
+This document describes the data sources in the [data](../data) directory that have been used for the project.
 
-## simd2020v2.xlsx
+## [simd2020v2.xlsx](../data/simd2020v2.xlsx)
 
 The [Scottish Index of Multiple Deprivation](https://www.gov.scot/publications/scottish-index-multiple-deprivation-2020/pages/1/) data set ranks different areas of Scotland from most deprived to least deprived using a number of indicators. There are 6977 observations and it was published on the 28th January 2020.
 
@@ -58,16 +58,16 @@ There are 1743 observation features that have a missing value.
 
 A value of 100 is the Scotland average for a population with the same age and sex profile.
 
-## glasgow-simd2020v2.csv
+## [glasgow-simd2020v2.csv](../data/glasgow-simd2020v2.csv)
 
 The subset of simd2020v2.xlsx observations with `Council_area` equal to `Glasgow City`. There are 747 observations and 137 missing feature values.
 
-## publicRecyclingPoints.json
+## [publicRecyclingPoints.json](../data/publicRecylingPoints.json)
 
 The location and details of over 700 communal public recycling facilities in Glasgow City.
 
 It was scraped from the public [Map](https://glasgowgis.maps.arcgis.com/apps/webappviewer/index.html?id=345f389a91ff4f1fa193b24df832fb05) hosted by [Glasgow City Council](https://www.glasgow.gov.uk/index.aspx?articleid=16569).
 
-## street-view
+## [street-view](../data/street-view)
 
 This directory contains Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 800x800 pixel resolution.
