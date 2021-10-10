@@ -21,8 +21,7 @@ The data sources are described in [DATA.md](./DATA.md).
 | Object Detection | [Faster R-CNN](https://arxiv.org/abs/1506.01497v3)                                                                                                                                            | Paper          |
 | Object Detection | [Splash of Color: Instance Segmentation with Mask R-CNN and Tensorflow](https://engineering.matterport.com/splash-of-color-instance-segmentation-with-mask-r-cnn-and-tensorflow-7c761e238b46) | Blog           |
 | Object Detection | [matterport/Mask_RCNN](https://github.com/matterport/Mask_RCNN)                                                                                                                               | Software       |
-| Object Detection | [facebookresearch/Detectron](https://github.com/facebookresearch/Detectron)                                                                                                                   |
-| Software         |
+| Object Detection | [facebookresearch/Detectron](https://github.com/facebookresearch/Detectron)                                                                                                                   | Software       |
 | Object Detection | [TrashNet](https://github.com/garythung/trashnet)                                                                                                                                             | Paper/Software |
 | Image Annotation | [Trash Annotations in Context Dataset](http://tacodataset.org/)                                                                                                                               | Website        |
 | Image Annotation | [superintendent](https://superintendent.readthedocs.io/en/latest/active-learning.html)                                                                                                        | Software       |
