@@ -1,18 +1,3 @@
-{
-  "devDependencies": {
-    "husky": "^7.0.2",
-    "lint-staged": "^11.2.0"
-  },
-  "scripts": {
-    "prepare": "husky install",
-    "lint": "bash -c 'pylint **/*.py'",
-    "format": "black .",
-    "py-install": "python -m venv venv && pip install -r requirements.txt"
-  },
-  "lint-staged": {
-    "*.py": [
-      "black",
-      "pylint"
-    ]
-  }
-}
+version https://git-lfs.github.com/spec/v1
+oid sha256:bfbe4b5cd9cfb7e171579d15edbbdab719e9679f69ff533cc08d68d13a17975f
+size 349

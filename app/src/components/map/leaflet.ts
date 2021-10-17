@@ -1,11 +1,3 @@
-import * as L from "leaflet";
-import "leaflet/dist/leaflet.css";
-
-// Required to load the leaflet.css images.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-delete (L.Icon.Default.prototype as any)._getIconUrl;
-L.Icon.Default.mergeOptions({
-  iconUrl: require("leaflet/dist/images/marker-icon.png"),
-  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
-  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
-});
+version https://git-lfs.github.com/spec/v1
+oid sha256:67562edf07a9705d0c3094884db6137f303c01843d646f6abaa87f3594d8d1d5
+size 451
