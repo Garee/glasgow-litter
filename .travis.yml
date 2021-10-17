@@ -1,3 +1,8 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:2cebdbc8f3d027b100f78d4f2bb122e58959398f8bcc87d9dbaf545dc2e303d4
-size 121
+language: python
+python:
+  - "3.9"
+install:
+  - npm install
+  - pip install -r requirements.txt
+script:
+  - npm run lint

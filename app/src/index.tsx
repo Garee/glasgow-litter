@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:891461266c7b5ca6fa227206d97f1ca5203f543167eec06e61cd67843c277714
-size 175
+import React from "react";
+import { render } from "react-dom";
+import { App } from "./components/app";
+import "./index.css";
+
+render(<App />, document.getElementById("app"));

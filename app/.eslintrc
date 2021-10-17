@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:683d1da8bcb5383eb3b8805c7743de969e59a8c26cb295aa5be134112908ca1b
-size 402
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "react"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  }
+}
