@@ -9,11 +9,13 @@ import {
   Tooltip,
   LayersControl,
   LayerGroup,
+  MarkerProps,
 } from "react-leaflet";
 import { wards } from "./wards";
 import "./leaflet";
 import "./map.css";
 import * as dataZones from "../../../../data/geojson/glasgow-data-zones.geojson.json";
+import * as streetViewImages from "../../../../data/street-view/images.json";
 
 export const Map: FC = () => {
   const center: LatLngExpression = [55.865, -4.257];
@@ -38,15 +40,24 @@ export const Map: FC = () => {
     },
   ];
 
-  (window as any).dataZones = dataZones;
-
-  const markers = [
-    {
-      id: 1,
-      position: center,
-      popupText: "Glasgow City",
+  const markers: any[] = Object.entries(streetViewImages).reduce(
+    (acc: any[], val: any[]) => {
+      const [dataZone, data] = val;
+      if (!dataZone || !data?.points) {
+        return acc;
+      }
+      return acc.concat(
+        data.points.map(({ lat, lon }: { lat: number; lon: number }) => {
+          return {
+            id: `${lat}_${lon}`,
+            position: [lat, lon],
+            popupText: `${dataZone}: ${lat},${lon}`,
+          };
+        })
+      );
     },
-  ];
+    []
+  );
 
   return (
     <MapContainer
@@ -68,7 +79,7 @@ export const Map: FC = () => {
             />
           </LayersControl.BaseLayer>
         ))}
-        <LayersControl.Overlay name="Glasgow's Wards" checked>
+        <LayersControl.Overlay name="Wards" checked>
           <LayerGroup>
             {wards.map((ward) => (
               <GeoJSON data={ward.data} style={ward.style} key={ward.id}>
@@ -77,22 +88,25 @@ export const Map: FC = () => {
             ))}
           </LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Glasgow's Data Zones" checked>
+        <LayersControl.Overlay name="Data Zones" checked>
           <GeoJSON
             data={dataZones as any}
             style={{
-              color: "blue",
-              weight: 1,
-              opacity: 0.2,
+              color: "black",
+              fillColor: "blue",
+              weight: 3,
+              opacity: 0.5,
             }}
           ></GeoJSON>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Images" checked>
-          {markers.map((marker) => (
-            <Marker position={marker.position} key={marker.id}>
-              <Popup>{marker.popupText}</Popup>
-            </Marker>
-          ))}
+        <LayersControl.Overlay name="Image Markers" checked>
+          <LayerGroup>
+            {markers.map((marker) => (
+              <Marker position={marker.position} key={marker.id}>
+                <Popup>{marker.popupText}</Popup>
+              </Marker>
+            ))}
+          </LayerGroup>
         </LayersControl.Overlay>
       </LayersControl>
     </MapContainer>
