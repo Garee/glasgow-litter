@@ -1,4 +1,4 @@
-import { LatLngExpression } from "leaflet";
+import { Icon, LatLngExpression } from "leaflet";
 import React, { FC } from "react";
 import {
   MapContainer,
@@ -16,6 +16,7 @@ import "./leaflet";
 import "./map.css";
 import * as dataZones from "../../../../data/geojson/glasgow-data-zones.geojson.json";
 import * as streetViewImages from "../../../../data/street-view/images.json";
+import * as publicRecyclingPoints from "../../../../data/publicRecyclingPoints.json";
 
 export const Map: FC = () => {
   const center: LatLngExpression = [55.865, -4.257];
@@ -57,6 +58,19 @@ export const Map: FC = () => {
       );
     },
     []
+  );
+
+  const publicRecyclingMarkers: any[] = publicRecyclingPoints.features.map(
+    (feature: any) => {
+      const lat = feature.geometry.y;
+      const lon = feature.geometry.x;
+      return {
+        id: `${lat}_${lon}`,
+        position: [lat, lon],
+        popupText: JSON.stringify(feature.attributes),
+        icon: new Icon({ iconUrl: "recycle-bin.png", iconSize: [30, 30] }),
+      };
+    }
   );
 
   return (
@@ -103,6 +117,19 @@ export const Map: FC = () => {
           <LayerGroup>
             {markers.map((marker) => (
               <Marker position={marker.position} key={marker.id}>
+                <Popup>{marker.popupText}</Popup>
+              </Marker>
+            ))}
+          </LayerGroup>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name="Public Recycling Facilities" checked>
+          <LayerGroup>
+            {publicRecyclingMarkers.map((marker) => (
+              <Marker
+                position={marker.position}
+                key={marker.id}
+                icon={marker.icon}
+              >
                 <Popup>{marker.popupText}</Popup>
               </Marker>
             ))}

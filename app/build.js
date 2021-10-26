@@ -8,6 +8,7 @@ function copyFiles() {
   const files = [
     { from: "src/index.html", to: `${outDir}/index.html` },
     { from: "src/assets/favicon.ico", to: `${outDir}/favicon.ico` },
+    { from: "src/assets/recycle-bin.png", to: `${outDir}/recycle-bin.png` },
   ];
 
   files.forEach(({ from, to }) => fs.copyFileSync(from, to));
