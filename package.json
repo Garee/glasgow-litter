@@ -5,10 +5,9 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "lint": "bash -c 'pylint **/*.py' && cd app && npm run lint",
+    "lint": "bash -c 'pylint **/*.py'",
     "format": "black .",
-    "py-install": "python -m venv venv && source venv/Scripts/activate && pip install -r requirements.txt",
-    "app-install": "cd app && npm install && cd .."
+    "py-install": "python -m venv venv && source venv/Scripts/activate && pip install -r requirements.txt"
   },
   "lint-staged": {
     "*.py": [

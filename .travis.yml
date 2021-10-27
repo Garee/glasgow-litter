@@ -3,7 +3,9 @@ python:
   - "3.9"
 install:
   - npm install
-  - npm run app-install
   - pip install -r requirements.txt
 script:
+  - npm run lint
+  - cd app
+  - npm install
   - npm run lint
