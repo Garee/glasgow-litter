@@ -5,7 +5,7 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "lint": "bash -c 'pylint **/*.py'",
+    "lint": "bash -c 'pylint **/*.py' && cd app && npm run lint",
     "format": "black .",
     "py-install": "python -m venv venv && pip install -r requirements.txt"
   },
