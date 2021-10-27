@@ -44,7 +44,7 @@ def download_image(lat, lon):
     res = requests.get(API_URL, params)
     if res.status_code == HTTP_STATUS_OK:
         fname = f"{lat}_{lon}_{IMG_WIDTH}x{IMG_HEIGHT}.jpg"
-        with open(fname, "wb") as file:
+        with open(fname, "wb", encoding="utf8") as file:
             file.write(res.content)
     else:
         raise DownloadImageError(res.text)
@@ -52,7 +52,7 @@ def download_image(lat, lon):
 
 def load_data_zone_geojson():
     data_zones = []
-    with open(GLASGOW_DATA_ZONES) as file:
+    with open(GLASGOW_DATA_ZONES, encoding="utf8") as file:
         collection = json.loads(file.read())
         features = collection["features"]
         for feature in features:
