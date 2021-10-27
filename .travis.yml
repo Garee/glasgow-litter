@@ -1,6 +1,8 @@
 language: python
 python:
   - "3.9"
+node_js:
+  - 14
 install:
   - npm install
   - pip install -r requirements.txt
