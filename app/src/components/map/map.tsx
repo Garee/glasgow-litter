@@ -9,7 +9,6 @@ import {
   Tooltip,
   LayersControl,
   LayerGroup,
-  MarkerProps,
 } from "react-leaflet";
 import { wards } from "./wards";
 import "./leaflet";
@@ -17,6 +16,7 @@ import "./map.css";
 import * as dataZones from "../../../../data/geojson/glasgow-data-zones.geojson.json";
 import * as streetViewImages from "../../../../data/street-view/images.json";
 import * as publicRecyclingPoints from "../../../../data/publicRecyclingPoints.json";
+import { GeoJsonObject } from "geojson";
 
 export const Map: FC = () => {
   const center: LatLngExpression = [55.865, -4.257];
@@ -41,8 +41,8 @@ export const Map: FC = () => {
     },
   ];
 
-  const markers: any[] = Object.entries(streetViewImages).reduce(
-    (acc: any[], val: any[]) => {
+  const imageMarkers = Object.entries(streetViewImages).reduce(
+    (acc: MapMarker[], val) => {
       const [dataZone, data] = val;
       if (!dataZone || !data?.points) {
         return acc;
@@ -60,8 +60,8 @@ export const Map: FC = () => {
     []
   );
 
-  const publicRecyclingMarkers: any[] = publicRecyclingPoints.features.map(
-    (feature: any) => {
+  const publicRecyclingMarkers = publicRecyclingPoints.features.map(
+    (feature) => {
       const lat = feature.geometry.y;
       const lon = feature.geometry.x;
       return {
@@ -104,7 +104,7 @@ export const Map: FC = () => {
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Data Zones" checked>
           <GeoJSON
-            data={dataZones as any}
+            data={dataZones as GeoJsonObject}
             style={{
               color: "black",
               fillColor: "blue",
@@ -115,7 +115,7 @@ export const Map: FC = () => {
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Image Markers" checked>
           <LayerGroup>
-            {markers.map((marker) => (
+            {imageMarkers.map((marker) => (
               <Marker position={marker.position} key={marker.id}>
                 <Popup>{marker.popupText}</Popup>
               </Marker>
@@ -139,3 +139,10 @@ export const Map: FC = () => {
     </MapContainer>
   );
 };
+
+interface MapMarker {
+  id: string;
+  position: LatLngExpression;
+  popupText: string;
+  icon?: Icon;
+}
