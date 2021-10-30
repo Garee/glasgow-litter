@@ -42,3 +42,7 @@ npm run format
 ## Data
 
 The project's data sources can be found in the `data` directory and are described in [DATA.md](data/DATA.md).
+
+## Acknowledgements
+
+Icons sourced from [iconmonstr](https://iconmonstr.com/license/).

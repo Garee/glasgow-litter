@@ -1,4 +1,7 @@
+import React, { FC } from "react";
 import { GeoJsonObject } from "geojson";
+import { WardProps, Ward } from "../ward";
+
 import * as anderstonCityYorkhill from "../../../../data/geojson/wards/anderston-city-yorkhill.geojson.json";
 import * as baillieston from "../../../../data/geojson/wards/baillieston.geojson.json";
 import * as calton from "../../../../data/geojson/wards/calton.geojson.json";
@@ -23,16 +26,19 @@ import * as southsideCentral from "../../../../data/geojson/wards/southside-cent
 import * as springburnRobroyston from "../../../../data/geojson/wards/springburn-robroyston.geojson.json";
 import * as victoriaPark from "../../../../data/geojson/wards/victoria-park.geojson.json";
 
-interface Ward {
-  id: number;
-  name: string;
-  data: GeoJsonObject;
-  style?: {
-    color?: string;
-  };
-}
+export type WardsProps = Record<string, never>;
 
-export const wards: Ward[] = [
+export const Wards: FC<WardsProps> = () => {
+  return (
+    <>
+      {wards.map((props: WardProps) => (
+        <Ward {...props} key={props.id} />
+      ))}
+    </>
+  );
+};
+
+const wards: WardProps[] = [
   {
     id: 10,
     name: "Anderston/City/Yorkhill",

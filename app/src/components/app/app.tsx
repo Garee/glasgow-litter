@@ -1,6 +1,8 @@
 import React, { FC } from "react";
 import { Map } from "../map";
 
-export const App: FC = () => {
+type AppProps = Record<string, never>;
+
+export const App: FC<AppProps> = () => {
   return <Map />;
 };

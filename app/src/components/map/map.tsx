@@ -3,27 +3,38 @@ import React, { FC } from "react";
 import {
   MapContainer,
   TileLayer,
-  GeoJSON,
-  Tooltip,
   LayersControl,
   LayerGroup,
 } from "react-leaflet";
-import { wards } from "./wards";
 import "./leaflet";
 import "./map.css";
-import * as dataZones from "../../../../data/geojson/glasgow-data-zones.geojson.json";
 import * as streetViewImages from "../../../../data/street-view/images.json";
 import * as publicRecyclingPoints from "../../../../data/publicRecyclingPoints.json";
-import { GeoJsonObject } from "geojson";
 import { ImageMarker, ImageMarkerProps } from "../image-marker";
 import { PublicRecyclingMarker } from "../public-recycling-marker";
+import { DataZones } from "../data-zones";
+import { Wards } from "../wards";
+import { features } from "process";
 
-export const Map: FC = () => {
-  const center: LatLngExpression = [55.865, -4.257];
-  const zoom = 12;
-  const scrollWheelZoom = true;
+export interface MapProps {
+  center?: LatLngExpression;
+  zoom?: number;
+  scrollWheelZoom?: boolean;
+  tileLayers?: TileLayer[];
+}
 
-  const tileLayers = [
+export interface TileLayer {
+  name: string;
+  attribution: string;
+  url: string;
+  isDefault?: boolean;
+}
+
+export const Map: FC<MapProps> = ({
+  center = [55.865, -4.257], // Glasgow City
+  zoom = 12,
+  scrollWheelZoom = true,
+  tileLayers = [
     {
       name: "OpenStreetMap Standard",
       attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
@@ -33,14 +44,16 @@ export const Map: FC = () => {
       name: "OpenStreetMap Black & White",
       attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
       url: "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
+      isDefault: true,
     },
     {
       name: "Stamen Watercolor",
       attribution: `Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.`,
       url: "https://stamen-tiles.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg",
     },
-  ];
-
+  ],
+} = {}) => {
+  const tileLayerControls = getTileLayerControls(tileLayers);
   const imageMarkers = getImageMarkers();
   const publicRecyclingMarkers = getPublicRecyclingMarkers();
 
@@ -52,37 +65,16 @@ export const Map: FC = () => {
       className="map"
     >
       <LayersControl position="topright">
-        {tileLayers.map((tileLayer, i) => (
-          <LayersControl.BaseLayer
-            name={tileLayer.name}
-            key={tileLayer.name}
-            checked={i == 0}
-          >
-            <TileLayer
-              attribution={tileLayer.attribution}
-              url={tileLayer.url}
-            />
-          </LayersControl.BaseLayer>
-        ))}
-        <LayersControl.Overlay name="Wards" checked>
+        {tileLayerControls}
+        <LayersControl.Overlay name="Data Zones" checked>
           <LayerGroup>
-            {wards.map((ward) => (
-              <GeoJSON data={ward.data} style={ward.style} key={ward.id}>
-                <Tooltip>{ward.name}</Tooltip>
-              </GeoJSON>
-            ))}
+            <DataZones />
           </LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Data Zones" checked>
-          <GeoJSON
-            data={dataZones as GeoJsonObject}
-            style={{
-              color: "black",
-              fillColor: "blue",
-              weight: 3,
-              opacity: 0.5,
-            }}
-          ></GeoJSON>
+        <LayersControl.Overlay name="Wards" checked>
+          <LayerGroup>
+            <Wards />
+          </LayerGroup>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Image Markers" checked>
           <LayerGroup>{imageMarkers}</LayerGroup>
@@ -95,6 +87,14 @@ export const Map: FC = () => {
   );
 };
 
+function getTileLayerControls(tileLayers: TileLayer[] = []): JSX.Element[] {
+  return tileLayers.map(({ name, attribution, url, isDefault }) => (
+    <LayersControl.BaseLayer name={name} key={name} checked={isDefault}>
+      <TileLayer attribution={attribution} url={url} />
+    </LayersControl.BaseLayer>
+  ));
+}
+
 function getImageMarkers(): JSX.Element[] {
   const imageMarkerData = Object.entries(streetViewImages).reduce(
     (acc: ImageMarkerProps[], val) => {
@@ -106,8 +106,9 @@ function getImageMarkers(): JSX.Element[] {
         data.points.map(({ lat, lon }: { lat: number; lon: number }) => {
           return {
             id: `${lat}_${lon}`,
-            position: [lat, lon],
-            popupText: `${dataZone}: ${lat},${lon}`,
+            dataZone,
+            lat,
+            lon,
           };
         })
       );
@@ -125,12 +126,14 @@ function getPublicRecyclingMarkers(): JSX.Element[] {
     (feature) => {
       const lat = feature.geometry.y;
       const lon = feature.geometry.x;
-      const position: LatLngExpression = [lat, lon];
+      const { LINKTEXT, MATERIALS, HYPERLINK } = feature.attributes;
       return {
         id: `${lat}_${lon}`,
-        position,
-        popupText: JSON.stringify(feature.attributes),
-        icon: new Icon({ iconUrl: "recycle-bin.png", iconSize: [30, 30] }),
+        lat,
+        lon,
+        name: LINKTEXT,
+        materials: MATERIALS,
+        link: HYPERLINK,
       };
     }
   );
