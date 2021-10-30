@@ -8,8 +8,8 @@ Identify the relationship, if any, between an area of Glasgow's deprivation and 
 
 ## Dependencies
 
-1. [Python 3](https://www.python.org/downloads)
-2. [Node.js 14.X](https://nodejs.org/en/download)
+1. [Python 3.9.6](https://www.python.org/downloads)
+2. [Node.js 16.13.0](https://nodejs.org/en/download)
 
 ## Quick Start
 
@@ -22,13 +22,9 @@ npm install
 Create a virtual environment and and install the required python packages:
 
 ```bash
-npm run py-install
-```
-
-Use the virtual environment:
-
-```bash
+python -m venv venv --prompt glasgow-litter
 source venv/Scripts/activate
+pip install -r requirements.txt
 ```
 
 Lint the code:

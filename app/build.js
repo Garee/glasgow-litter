@@ -6,16 +6,16 @@ const outDir = "build";
 
 function copyFiles() {
   const files = [
-    { from: "src/index.html", to: `${outDir}/index.html` },
-    { from: "src/assets/favicon.ico", to: `${outDir}/favicon.ico` },
-    { from: "src/assets/recycle-bin.png", to: `${outDir}/recycle-bin.png` },
+    { from: "app/src/index.html", to: `${outDir}/index.html` },
+    { from: "app/src/assets/favicon.ico", to: `${outDir}/favicon.ico` },
+    { from: "app/src/assets/recycle-bin.png", to: `${outDir}/recycle-bin.png` },
   ];
 
   files.forEach(({ from, to }) => fs.copyFileSync(from, to));
 }
 
 const options = {
-  entryPoints: ["src/index.tsx"],
+  entryPoints: ["app/src/index.tsx"],
   outdir: outDir,
   bundle: true,
   loader: {

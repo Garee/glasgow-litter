@@ -64,9 +64,10 @@ export const Map: FC = () => {
     (feature) => {
       const lat = feature.geometry.y;
       const lon = feature.geometry.x;
+      const position: LatLngExpression = [lat, lon];
       return {
         id: `${lat}_${lon}`,
-        position: [lat, lon],
+        position,
         popupText: JSON.stringify(feature.attributes),
         icon: new Icon({ iconUrl: "recycle-bin.png", iconSize: [30, 30] }),
       };

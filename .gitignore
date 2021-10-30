@@ -134,7 +134,9 @@ dmypy.json
 # npm
 node_modules/
 
-# the app
-app/node_modules
-app/build
-app/tsconfig.tsbuildinfo
+# app
+build/
+tsconfig.tsbuildinfo
+
+# nodist
+.node-version

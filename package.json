@@ -1,18 +1,58 @@
 {
+  "name": "glasgow-litter",
+  "description": "A visualization of Glasgow's litter.",
+  "private": true,
+  "author": "Gary Blackwood <gary@garyblackwood.co.uk>",
+  "license": "MIT",
+  "keywords": [
+    "glasgow",
+    "litter"
+  ],
   "devDependencies": {
+    "@types/geojson": "^7946.0.8",
+    "@types/leaflet": "^1.7.5",
+    "@types/node": "^16.11.1",
+    "@types/react": "^17.0.30",
+    "@types/react-dom": "^17.0.9",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "@typescript-eslint/parser": "^5.0.0",
+    "browser-sync": "^2.27.5",
+    "concurrently": "^6.3.0",
+    "cross-env": "^7.0.3",
+    "esbuild": "^0.13.7",
+    "eslint": "^7.32.0",
+    "eslint-plugin-react": "^7.26.1",
     "husky": "^7.0.2",
-    "lint-staged": "^11.2.0"
+    "prettier": "^2.4.1",
+    "lint-staged": "^11.2.0",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "leaflet": "^1.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-leaflet": "^3.2.2"
   },
   "scripts": {
+    "build": "node app/build.js",
+    "build:prod": "cross-env NODE_ENV=production npm run build",
+    "clean": "rm -rf build",
+    "dev": "concurrently --kill-others \"npm run build\" \"npm run tsc:watch\" \"npm run sync\"",
+    "format": "prettier --write app/*.js app/src/*.{tsx,html} && black .",
+    "lint": "bash -c 'pylint **/*.py' && eslint -c app/.eslintrc --fix **/*.{ts,tsx}",
     "prepare": "husky install",
-    "lint": "bash -c 'pylint **/*.py'",
-    "format": "black .",
-    "py-install": "python -m venv venv && source venv/Scripts/activate && pip install -r requirements.txt"
+    "sync": "browser-sync start --server --watch --serveStatic build",
+    "tsc": "tsc --project app/tsconfig.json",
+    "tsc:watch": "npm run tsc -- --watch"
   },
   "lint-staged": {
     "*.py": [
       "black",
       "pylint"
+    ],
+    "*.{ts,tsx}": [
+      "prettier",
+      "eslint -c app/.eslintrc --fix"
     ]
   }
 }
