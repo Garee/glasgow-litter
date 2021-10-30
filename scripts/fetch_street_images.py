@@ -1,8 +1,21 @@
 # pylint: disable=missing-docstring
 
 """
-This script is an example of how to use the Google Street View Static API
-to download a street view image.
+usage: fetch_street_images.py [-h] [--n-images N_IMAGES] [--data-zone DATA_ZONE [DATA_ZONE ...]]
+                              [--dry-run]
+                              out_path
+
+Download Google Street View images of Glasgow City.
+
+positional arguments:
+  out_path              directory path in which to store the image files
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --n-images N_IMAGES   number of images to download per data zone (default 1)
+  --data-zone DATA_ZONE [DATA_ZONE ...]
+                        data zones for which images should be downloaded
+  --dry-run             output a JSON object that describes the images that would be downloaded.
 """
 import os
 import sys

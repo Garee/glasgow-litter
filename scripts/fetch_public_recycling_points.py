@@ -1,11 +1,20 @@
 """
-This script requests the location of public recycling facilities in Glasgow
-City. It saves the location and materials processed to a JSON file.
+usage: fetch_public_recycling_points.py [-h] out_path
 
-More information can be found at https://www.glasgow.gov.uk/index.aspx?articleid=16569
+Download public recycling facility locations in Glasgow City.
+
+positional arguments:
+  out_path    file path in which to store the public recycling point data
+
+optional arguments:
+  -h, --help  show this help message and exit
+
+Source: https://www.glasgow.gov.uk/index.aspx?articleid=16569
 """
 import sys
 import json
+import argparse
+import pathlib
 import requests
 
 MAP_QUERY_URL = (
@@ -51,17 +60,30 @@ HEADERS = {
 }
 
 
+def parse_args():
+    """
+    Parse and return the program's command line arguments.
+    """
+    parser = argparse.ArgumentParser(
+        description="Download public recycling facility locations in Glasgow City."
+    )
+    parser.add_argument(
+        "out_path",
+        type=pathlib.Path,
+        help="file path in which to store the public recycling point data",
+    )
+    return parser.parse_args()
+
+
 def main():
     """
     Requests the public recycling locations and saves the response
     as JSON to file.
     """
-    if len(sys.argv) > 2:
-        print("Usage: python fetch_public_recycling_points.py <out_file_path>")
-        sys.exit(1)
+    args = parse_args()
     res = requests.get(MAP_QUERY_URL, PARAMS, headers=HEADERS)
     if res.status_code == HTTP_STATUS_OK:
-        with open(sys.argv[1], "w", encoding="utf8") as file:
+        with open(args.out_path, "w", encoding="utf8") as file:
             file.write(json.dumps(res.json(), indent=2))
     else:
         print(res.text)
