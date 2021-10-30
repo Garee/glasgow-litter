@@ -40,10 +40,13 @@ API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
 
 GLASGOW_DATA_ZONES = "data/geojson/glasgow-data-zones.geojson.json"
 HTTP_STATUS_OK = 200
+HTTP_STATUS_NOT_FOUND = 404
 
 
 class DownloadImageError(Exception):
-    pass
+    def __init__(self, response):
+        self.response = response
+        super().__init__(response.text)
 
 
 def download_images(metadata, fail_fast=False):
@@ -63,7 +66,10 @@ def download_images(metadata, fail_fast=False):
             try:
                 download_image(image)
             except DownloadImageError as err:
-                print(err)
+                if err.response.status_code == HTTP_STATUS_NOT_FOUND:
+                    print("An image could not be found.")
+                else:
+                    print(err)
                 if fail_fast:
                     sys.exit(1)
 
@@ -86,7 +92,7 @@ def download_image(image):
         with open(image["path"], "wb") as file:
             file.write(res.content)
     else:
-        raise DownloadImageError(res.text)
+        raise DownloadImageError(res)
 
 
 def load_data_zone_geojson():

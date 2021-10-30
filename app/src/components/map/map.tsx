@@ -1,4 +1,4 @@
-import { Icon, LatLngExpression } from "leaflet";
+import { LatLngExpression } from "leaflet";
 import React, { FC } from "react";
 import {
   MapContainer,
@@ -8,13 +8,12 @@ import {
 } from "react-leaflet";
 import "./leaflet";
 import "./map.css";
-import * as streetViewImages from "../../../../data/street-view/images.json";
+import * as streetViewImages from "../../../../data/images/images.json";
 import * as publicRecyclingPoints from "../../../../data/publicRecyclingPoints.json";
 import { ImageMarker, ImageMarkerProps } from "../image-marker";
 import { PublicRecyclingMarker } from "../public-recycling-marker";
 import { DataZones } from "../data-zones";
 import { Wards } from "../wards";
-import { features } from "process";
 
 export interface MapProps {
   center?: LatLngExpression;

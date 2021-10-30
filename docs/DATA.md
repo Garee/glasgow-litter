@@ -70,9 +70,9 @@ The location and details of over 700 communal public recycling facilities in Gla
 
 It was scraped from the public [Map](https://glasgowgis.maps.arcgis.com/apps/webappviewer/index.html?id=345f389a91ff4f1fa193b24df832fb05) hosted by [Glasgow City Council](https://www.glasgow.gov.uk/index.aspx?articleid=16569).
 
-## [street-view](../data/street-view)
+## [images](../data/images)
 
-This directory contains Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 800x800 pixel resolution.
+This directory contains Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 640x640 pixel resolution, which is the maximum size the API offers.
 
 ## [geojson](../data/geojson)
 
