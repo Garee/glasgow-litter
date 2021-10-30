@@ -1,6 +1,11 @@
 language: python
 python:
   - "3.9"
+cache:
+  directories:
+    - data
+git:
+  lfs_skip_smudge: true
 install:
   - npm install
   - pip install -r requirements.txt
