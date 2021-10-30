@@ -96,14 +96,14 @@ function getTileLayerControls(tileLayers: TileLayer[] = []): JSX.Element[] {
 }
 
 function getImageMarkers(): JSX.Element[] {
-  const imageMarkerData = Object.entries(streetViewImages).reduce(
+  const imageMarkerData = Object.entries(streetViewImages.dataZones).reduce(
     (acc: ImageMarkerProps[], val) => {
       const [dataZone, data] = val;
-      if (!dataZone || !data?.points) {
+      if (!dataZone || !data?.images) {
         return acc;
       }
       return acc.concat(
-        data.points.map(({ lat, lon }: { lat: number; lon: number }) => {
+        data.images.map(({ lat, lon }: { lat: number; lon: number }) => {
           return {
             id: `${lat}_${lon}`,
             dataZone,
