@@ -1,13 +1,21 @@
 language: python
 python:
   - "3.9"
+install:
+  - pip install -r requirements.txt
+script:
+  - npm run lint:py
 cache:
   directories:
     - data
 git:
   lfs_skip_smudge: true
-install:
-  - npm install
-  - pip install -r requirements.txt
-script:
-  - npm run lint
+jobs:
+  include:
+    - language: node_js
+      node_js:
+        - 16
+      install:
+        - npm install
+      script:
+        - npm run lint:app
