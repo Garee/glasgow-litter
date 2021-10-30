@@ -140,3 +140,6 @@ tsconfig.tsbuildinfo
 
 # nodist
 .node-version
+
+# large data files
+data/**/*.jpg
