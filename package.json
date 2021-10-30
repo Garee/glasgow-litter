@@ -44,6 +44,7 @@
     "lint:py": "bash -c 'pylint **/*.py'",
     "lint:app": "eslint -c app/.eslintrc --fix **/*.{ts,tsx}",
     "prepare": "husky install",
+    "start": "npm run dev",
     "sync": "browser-sync start --server --watch --serveStatic build",
     "tsc": "tsc --project app/tsconfig.json",
     "tsc:watch": "npm run tsc -- --watch"

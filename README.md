@@ -27,6 +27,13 @@ source venv/Scripts/activate
 pip install -r requirements.txt
 ```
 
+Start the app:
+
+```bash
+# Opens localhost:3000 in your browser
+npm start
+```
+
 Lint the code:
 
 ```bash
