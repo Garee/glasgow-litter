@@ -3,8 +3,6 @@ import React, { FC } from "react";
 import {
   MapContainer,
   TileLayer,
-  Marker,
-  Popup,
   GeoJSON,
   Tooltip,
   LayersControl,
@@ -17,6 +15,8 @@ import * as dataZones from "../../../../data/geojson/glasgow-data-zones.geojson.
 import * as streetViewImages from "../../../../data/street-view/images.json";
 import * as publicRecyclingPoints from "../../../../data/publicRecyclingPoints.json";
 import { GeoJsonObject } from "geojson";
+import { ImageMarker, ImageMarkerProps } from "../image-marker";
+import { PublicRecyclingMarker } from "../public-recycling-marker";
 
 export const Map: FC = () => {
   const center: LatLngExpression = [55.865, -4.257];
@@ -41,38 +41,8 @@ export const Map: FC = () => {
     },
   ];
 
-  const imageMarkers = Object.entries(streetViewImages).reduce(
-    (acc: MapMarker[], val) => {
-      const [dataZone, data] = val;
-      if (!dataZone || !data?.points) {
-        return acc;
-      }
-      return acc.concat(
-        data.points.map(({ lat, lon }: { lat: number; lon: number }) => {
-          return {
-            id: `${lat}_${lon}`,
-            position: [lat, lon],
-            popupText: `${dataZone}: ${lat},${lon}`,
-          };
-        })
-      );
-    },
-    []
-  );
-
-  const publicRecyclingMarkers = publicRecyclingPoints.features.map(
-    (feature) => {
-      const lat = feature.geometry.y;
-      const lon = feature.geometry.x;
-      const position: LatLngExpression = [lat, lon];
-      return {
-        id: `${lat}_${lon}`,
-        position,
-        popupText: JSON.stringify(feature.attributes),
-        icon: new Icon({ iconUrl: "recycle-bin.png", iconSize: [30, 30] }),
-      };
-    }
-  );
+  const imageMarkers = getImageMarkers();
+  const publicRecyclingMarkers = getPublicRecyclingMarkers();
 
   return (
     <MapContainer
@@ -115,35 +85,57 @@ export const Map: FC = () => {
           ></GeoJSON>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Image Markers" checked>
-          <LayerGroup>
-            {imageMarkers.map((marker) => (
-              <Marker position={marker.position} key={marker.id}>
-                <Popup>{marker.popupText}</Popup>
-              </Marker>
-            ))}
-          </LayerGroup>
+          <LayerGroup>{imageMarkers}</LayerGroup>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Public Recycling Facilities" checked>
-          <LayerGroup>
-            {publicRecyclingMarkers.map((marker) => (
-              <Marker
-                position={marker.position}
-                key={marker.id}
-                icon={marker.icon}
-              >
-                <Popup>{marker.popupText}</Popup>
-              </Marker>
-            ))}
-          </LayerGroup>
+          <LayerGroup>{publicRecyclingMarkers}</LayerGroup>
         </LayersControl.Overlay>
       </LayersControl>
     </MapContainer>
   );
 };
 
-interface MapMarker {
-  id: string;
-  position: LatLngExpression;
-  popupText: string;
-  icon?: Icon;
+function getImageMarkers(): JSX.Element[] {
+  const imageMarkerData = Object.entries(streetViewImages).reduce(
+    (acc: ImageMarkerProps[], val) => {
+      const [dataZone, data] = val;
+      if (!dataZone || !data?.points) {
+        return acc;
+      }
+      return acc.concat(
+        data.points.map(({ lat, lon }: { lat: number; lon: number }) => {
+          return {
+            id: `${lat}_${lon}`,
+            position: [lat, lon],
+            popupText: `${dataZone}: ${lat},${lon}`,
+          };
+        })
+      );
+    },
+    []
+  );
+
+  return imageMarkerData.map((props) => (
+    <ImageMarker {...props} key={props.id} />
+  ));
+}
+
+function getPublicRecyclingMarkers(): JSX.Element[] {
+  const publicRecyclingMarkerData = publicRecyclingPoints.features.map(
+    (feature) => {
+      const lat = feature.geometry.y;
+      const lon = feature.geometry.x;
+      const position: LatLngExpression = [lat, lon];
+      return {
+        id: `${lat}_${lon}`,
+        position,
+        popupText: JSON.stringify(feature.attributes),
+        icon: new Icon({ iconUrl: "recycle-bin.png", iconSize: [30, 30] }),
+      };
+    }
+  );
+
+  return publicRecyclingMarkerData.map((props) => (
+    <PublicRecyclingMarker {...props} key={props.id} />
+  ));
 }
