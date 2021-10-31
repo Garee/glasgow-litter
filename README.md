@@ -50,6 +50,18 @@ npm run format
 
 The project's data sources can be found in the `data` directory and are described in [DATA.md](data/DATA.md).
 
+## Annotations
+
+Image annotations were added using [Label Studio](https://labelstud.io/).
+
+Run Label Studio:
+
+```bash
+export LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
+export LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=<path_to_data>
+bin/label-studio.exe
+```
+
 ## Acknowledgements
 
 Icons sourced from [iconmonstr](https://iconmonstr.com/license/).
