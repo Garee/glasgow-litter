@@ -26,8 +26,8 @@ import os
 import sys
 import json
 import random
-import pathlib
 import argparse
+from pathlib import Path
 from datetime import datetime
 import requests
 from dotenv import load_dotenv
@@ -59,7 +59,7 @@ def download_images(metadata, fail_fast=False):
         for j, image in enumerate(images):
             out_dir, fpath, name = image["dir"], image["path"], image["name"]
             print(f"Downloading image {name} ({j+1}/{n_images})")
-            if pathlib.Path(fpath).is_file():
+            if Path(fpath).is_file():
                 print("file already exists")
                 continue
             os.makedirs(out_dir, exist_ok=True)
@@ -89,7 +89,7 @@ def download_image(image):
     }
     res = requests.get(API_URL, params)
     if res.status_code == HTTP_STATUS_OK:
-        with open(image["path"], "wb") as file:
+        with open(Path(image["path"]), "wb") as file:
             file.write(res.content)
     else:
         raise DownloadImageError(res)
@@ -124,7 +124,7 @@ def parse_args():
     )
     parser.add_argument(
         "out_path",
-        type=pathlib.Path,
+        type=Path,
         help="directory path in which to store the image files",
     )
     parser.add_argument(
@@ -225,7 +225,7 @@ def generate_metadata(data_zones, opts):
 
 
 def write_metadata_file(metadata, out_dir):
-    fpath = f"{out_dir}/images.json"
+    fpath = Path(f"{out_dir}/images.json")
     with open(fpath, "w", encoding="utf8") as file:
         file.write(json.dumps(metadata))
 
