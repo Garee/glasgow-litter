@@ -4,7 +4,7 @@ This document describes the data sources in the [data](../data) directory that h
 
 The contents of this directory are stored using [Git Large File Storage](https://git-lfs.github.com/).
 
-## [simd2020v2.xlsx](../data/simd2020v2.xlsx)
+## [simd2020v2.xlsx](https://drive.protonmail.com/urls/B1NRZSB9EW#pfgpUVl8w72Z)
 
 The [Scottish Index of Multiple Deprivation](https://www.gov.scot/publications/scottish-index-multiple-deprivation-2020/pages/1/) data set ranks different areas of Scotland from most deprived to least deprived using a number of indicators. There are 6977 observations and it was published on the 28th January 2020.
 
@@ -73,6 +73,8 @@ It was scraped from the public [Map](https://glasgowgis.maps.arcgis.com/apps/web
 ## [images](../data/images)
 
 This directory contains Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 640x640 pixel resolution, which is the maximum size the API offers.
+
+Download this [zip file](https://drive.protonmail.com/urls/GJZBPCWC6R#9x8FqomqcIRQ) and extract the images. They are not stored in this repository due to size constraints.
 
 ## [geojson](../data/geojson)
 
