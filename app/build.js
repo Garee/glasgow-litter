@@ -1,18 +1,15 @@
-const fs = require("fs");
+const fs = require("fs-extra");
 const esbuild = require("esbuild");
 
 const isProduction = process.env.NODE_ENV === "production";
 const outDir = "build";
 
 function copyFiles() {
-  const files = [
-    { from: "app/src/index.html", to: `${outDir}/index.html` },
-    { from: "app/src/assets/favicon.ico", to: `${outDir}/favicon.ico` },
-    { from: "app/src/assets/recycling.png", to: `${outDir}/recycling.png` },
-    { from: "app/src/assets/image.png", to: `${outDir}/image.png` },
-  ];
+  const files = [{ from: "app/src/index.html", to: `${outDir}/index.html` }];
+  const dirs = [{ from: "app/src/assets", to: `${outDir}` }];
 
   files.forEach(({ from, to }) => fs.copyFileSync(from, to));
+  dirs.forEach(({ from, to }) => fs.copySync(from, to));
 }
 
 const options = {

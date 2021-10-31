@@ -102,12 +102,15 @@ function getImageMarkers(): JSX.Element[] {
         return acc;
       }
       return acc.concat(
-        data.images.map(({ lat, lon }: { lat: number; lon: number }) => {
+        data.images.map(({ lat, lon, width, height, path }) => {
           return {
             id: `${lat}_${lon}`,
             dataZone,
             lat,
             lon,
+            width,
+            height,
+            path,
           };
         })
       );
