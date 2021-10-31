@@ -1,7 +1,7 @@
 import { Icon, LatLngExpression } from "leaflet";
 import React, { FC } from "react";
 import { Marker, Popup } from "react-leaflet";
-
+import "./public-recycling-marker.css";
 export interface PublicRecyclingMarkerProps {
   id: string;
   lat: number;
@@ -18,7 +18,11 @@ export const PublicRecyclingMarker: FC<PublicRecyclingMarkerProps> = ({
   materials,
   link,
 }) => {
-  const icon = new Icon({ iconUrl: "recycling.png", iconSize: [32, 32] });
+  const icon = new Icon({
+    iconUrl: "recycling.png",
+    iconSize: [32, 32],
+    className: "public-recycling-marker-icon",
+  });
   const position: LatLngExpression = [lat, lon];
   return (
     <Marker position={position} icon={icon}>
