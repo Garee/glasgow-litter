@@ -16,7 +16,6 @@ export const PublicRecyclingMarker: FC<PublicRecyclingMarkerProps> = ({
   lon,
   name,
   materials,
-  link,
 }) => {
   const icon = new Icon({
     iconUrl: "recycling.png",
@@ -29,15 +28,13 @@ export const PublicRecyclingMarker: FC<PublicRecyclingMarkerProps> = ({
       <Popup>
         <strong>{name}</strong>
         <br />
-        <span>{materials}</span>
         <br />
         <span>Latitude: {lat}</span>
         <br />
         <span>Longitude: {lon}</span>
         <br />
-        <span>
-          <a href={link}>Link</a>
-        </span>
+        <br />
+        <span>{materials}</span>
       </Popup>
     </Marker>
   );
