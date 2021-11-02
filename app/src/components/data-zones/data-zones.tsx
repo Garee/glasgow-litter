@@ -8,9 +8,9 @@ export type DataZonesProps = Record<string, never>;
 export const DataZones: FC<DataZonesProps> = () => {
   const style = {
     color: "black",
-    fillColor: "blue",
+    fillColor: "white",
     weight: 3,
-    opacity: 0.5,
+    opacity: 1,
   };
 
   return <GeoJSON data={dataZones as GeoJsonObject} style={style}></GeoJSON>;
