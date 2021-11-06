@@ -254,7 +254,7 @@ def merge_metadata_with_existing(metadata, out_dir):
 def write_metadata_file(metadata, out_dir):
     fpath = Path(f"{out_dir}/images.json")
     with open(fpath, "w", encoding="utf8") as file:
-        file.write(json.dumps(metadata))
+        file.write(json.dumps(metadata, indent=2))
 
 
 def main():
@@ -274,7 +274,7 @@ def main():
     if args.dry_run:
         metadata = merge_metadata_with_existing(metadata, args.out_path)
         metadata = filter_404_images(metadata)
-        print(json.dumps(metadata))
+        print(json.dumps(metadata, indent=2))
     else:
         download_images(metadata, fail_fast=args.fail_fast)
         metadata = merge_metadata_with_existing(metadata, args.out_path)
