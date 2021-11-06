@@ -24,6 +24,7 @@ optional arguments:
 """
 import os
 import sys
+import copy
 import json
 import random
 import argparse
@@ -224,6 +225,32 @@ def generate_metadata(data_zones, opts):
     return metadata
 
 
+def filter_404_images(metadata):
+    result = copy.deepcopy(metadata)
+    result["dataZones"] = {}
+    for dz_name, data_zone in metadata["dataZones"].items():
+        result["dataZones"][dz_name] = {"images": []}
+        for image in data_zone["images"]:
+            fpath = Path(image["path"])
+            if fpath.is_file():
+                result["dataZones"][dz_name]["images"].append(image)
+    return result
+
+
+def merge_metadata_with_existing(metadata, out_dir):
+    fpath = Path(f"{out_dir}/images.json")
+    if fpath.is_file():
+        with open(fpath, "r", encoding="utf8") as file:
+            existing = json.loads(file.read())
+            for dz_name, data_zone in metadata["dataZones"].items():
+                if dz_name not in existing["dataZones"]:
+                    existing["dataZones"][dz_name] = {"images": []}
+                for image in data_zone["images"]:
+                    existing["dataZones"][dz_name]["images"].append(image)
+        return existing
+    return metadata
+
+
 def write_metadata_file(metadata, out_dir):
     fpath = Path(f"{out_dir}/images.json")
     with open(fpath, "w", encoding="utf8") as file:
@@ -245,9 +272,13 @@ def main():
         },
     )
     if args.dry_run:
+        metadata = merge_metadata_with_existing(metadata, args.out_path)
+        metadata = filter_404_images(metadata)
         print(json.dumps(metadata))
     else:
         download_images(metadata, fail_fast=args.fail_fast)
+        metadata = merge_metadata_with_existing(metadata, args.out_path)
+        metadata = filter_404_images(metadata)
         write_metadata_file(metadata, args.out_path)
 
 
