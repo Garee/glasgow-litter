@@ -75,10 +75,10 @@ export const Map: FC<MapProps> = ({
             <Wards />
           </LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Image Markers" checked>
+        <LayersControl.Overlay name="Image Markers">
           <LayerGroup>{imageMarkers}</LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Public Recycling Facilities" checked>
+        <LayersControl.Overlay name="Public Recycling Facilities">
           <LayerGroup>{publicRecyclingMarkers}</LayerGroup>
         </LayersControl.Overlay>
       </LayersControl>
