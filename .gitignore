@@ -142,4 +142,5 @@ tsconfig.tsbuildinfo
 .node-version
 
 # large data files
-data/images/**/*.jpg
+data/**/*.jpg
+data/models
