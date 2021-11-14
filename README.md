@@ -59,7 +59,7 @@ Run Label Studio:
 ```bash
 export LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
 export LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=<path_to_data>
-bin/label-studio.exe
+bin/label-studio.exe --data-dir data/label-studio
 ```
 
 ## Acknowledgements
