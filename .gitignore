@@ -144,3 +144,8 @@ tsconfig.tsbuildinfo
 # large data files
 data/**/*.jpg
 data/models
+models/detectron2/output/model_final.pth
+models/detectron2/output/model_final.pth
+
+# label studio
+data/label-studio/export

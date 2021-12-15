@@ -1,3 +1,6 @@
 [submodule "models/yolov5/yolov5"]
 	path = models/yolov5/yolov5
 	url = https://github.com/ultralytics/yolov5
+[submodule "models/detectron2/detectron2"]
+	path = models/detectron2/detectron2
+	url = https://github.com/facebookresearch/detectron2
