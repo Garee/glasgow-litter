@@ -10,6 +10,7 @@ Identify the relationship, if any, between an area of Glasgow's deprivation and 
 
 1. [Python 3.9.6](https://www.python.org/downloads)
 2. [Node.js 16.13.0](https://nodejs.org/en/download)
+3. [CUDA Toolkit 11.3](https://developer.nvidia.com/cuda-11.3.0-download-archive)
 
 ## Quick Start
 
