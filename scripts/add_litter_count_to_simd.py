@@ -11,7 +11,7 @@ def write_to_simd(simd_path, out_path, counts):
         csv_reader = csv.reader(fp)
         header = next(csv_reader)
         header.append("litter")
-        rows = []
+        rows = [header]
         for row in csv_reader:
             data_zone = row[0]
             row.append(counts[data_zone])
