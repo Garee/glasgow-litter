@@ -150,3 +150,6 @@ models/yolov5/weights
 
 # label studio
 data/label-studio/export
+
+# wandb
+models/yolov5/wandb
