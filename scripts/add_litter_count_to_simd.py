@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 def write_to_simd(simd_path, out_path, counts):
-    with open(simd_path, "r") as fp:
+    with open(simd_path, "r", newline="") as fp:
         csv_reader = csv.reader(fp)
         header = next(csv_reader)
         header.append("litter")
@@ -17,7 +17,7 @@ def write_to_simd(simd_path, out_path, counts):
             row.append(counts[data_zone])
             rows.append(row)
         out_path = os.path.join(out_path, os.path.basename(simd_path))
-        with open(out_path, "w") as out_fp:
+        with open(out_path, "w", newline="") as out_fp:
             csv_writer = csv.writer(out_fp)
             csv_writer.writerows(rows)
 
@@ -36,14 +36,19 @@ def count_data_zones_litter(images_path, labels_path):
 
 def count_data_zone_litter(data_zone_path, labels_path):
     count = 0
-    label_file_names = glob.iglob(os.path.join(labels_path, "*.txt"))
-    for i_path in glob.iglob(os.path.join(data_zone_path, "*.jpg")):
-        ifname = os.path.basename(i_path)
-        for l_path in label_file_names:
-            lfname = os.path.basename(l_path)
-            if lfname.startswith(ifname.replace(".jpg", "")):
-                with open(l_path, "r") as fp:
-                    count += len(fp.readlines())
+    label_file_paths = glob.iglob(os.path.join(labels_path, "*.txt"))
+    label_prefixes = {}
+    for label_path in label_file_paths:
+        label_name = os.path.basename(label_path)
+        label_prefix = label_name.replace(".txt", "")
+        label_prefixes[label_prefix] = label_path
+    image_file_paths = glob.iglob(os.path.join(data_zone_path, "*.jpg"))
+    for image_path in image_file_paths:
+        image_name = os.path.basename(image_path)
+        image_prefix = image_name.replace(".jpg", "")
+        if image_prefix in label_prefixes:
+            with open(label_prefixes[image_prefix], "r") as fp:
+                count += len(fp.readlines())
     return count
 
 
