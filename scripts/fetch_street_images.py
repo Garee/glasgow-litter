@@ -13,6 +13,8 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   --n-images N_IMAGES   number of images to download per data zone (default 1)
+  --max-images MAX_IMAGES
+                        maximum number of images per data zone (default 100)
   --size SIZE           the square pixel size of each image (default 640)
   --fov FOV             the field of view in degrees (default 90)
   --pitch PITCH         the up/down angle to use relative to the street view vehicle (default 0)
@@ -135,6 +137,12 @@ def parse_args():
         help="number of images to download per data zone (default 1)",
     )
     parser.add_argument(
+        "--max-images",
+        type=int,
+        default=100,
+        help="maximum number of images per data zone (default 100)",
+    )
+    parser.add_argument(
         "--size",
         type=int,
         default=640,
@@ -237,7 +245,7 @@ def filter_404_images(metadata):
     return result
 
 
-def merge_metadata_with_existing(metadata, out_dir):
+def merge_metadata_with_existing(metadata, out_dir, max_images=100):
     fpath = Path(f"{out_dir}/images.json")
     if fpath.is_file():
         with open(fpath, "r", encoding="utf8") as file:
@@ -245,8 +253,11 @@ def merge_metadata_with_existing(metadata, out_dir):
             for dz_name, data_zone in metadata["dataZones"].items():
                 if dz_name not in existing["dataZones"]:
                     existing["dataZones"][dz_name] = {"images": []}
-                for image in data_zone["images"]:
-                    existing["dataZones"][dz_name]["images"].append(image)
+                existing_images = existing["dataZones"][dz_name]["images"]
+                n_images_to_add = max_images - len(existing_images)
+                if n_images_to_add > 0:
+                    for image in data_zone["images"][:n_images_to_add]:
+                        existing_images.append(image)
         return existing
     return metadata
 
@@ -272,12 +283,16 @@ def main():
         },
     )
     if args.dry_run:
-        metadata = merge_metadata_with_existing(metadata, args.out_path)
+        metadata = merge_metadata_with_existing(
+            metadata, args.out_path, args.max_images
+        )
         metadata = filter_404_images(metadata)
         print(json.dumps(metadata, indent=2))
     else:
         download_images(metadata, fail_fast=args.fail_fast)
-        metadata = merge_metadata_with_existing(metadata, args.out_path)
+        metadata = merge_metadata_with_existing(
+            metadata, args.out_path, args.max_images
+        )
         metadata = filter_404_images(metadata)
         write_metadata_file(metadata, args.out_path)
 
