@@ -52,12 +52,19 @@ class DownloadImageError(Exception):
         super().__init__(response.text)
 
 
-def download_images(metadata, fail_fast=False):
+def download_images(metadata, out_dir, fail_fast=False, max_images=100):
     data_zones = metadata["dataZones"]
     n_data_zones = len(data_zones)
     for i, (dz_name, data_zone) in enumerate(data_zones.items()):
         print(f"Downloading images from data zone {dz_name} ({i+1}/{n_data_zones})")
-        images = data_zone["images"]
+        n_current_images = get_n_current_images(dz_name, out_dir)
+        n_images_to_add = max_images - get_n_current_images(dz_name, out_dir)
+        if n_images_to_add <= 0:
+            print(
+                f"Maximum number of images already reached: {n_current_images}/{max_images}"
+            )
+            continue
+        images = data_zone["images"][:n_images_to_add]
         n_images = len(images)
         for j, image in enumerate(images):
             out_dir, fpath, name = image["dir"], image["path"], image["name"]
@@ -254,12 +261,20 @@ def merge_metadata_with_existing(metadata, out_dir, max_images=100):
                 if dz_name not in existing["dataZones"]:
                     existing["dataZones"][dz_name] = {"images": []}
                 existing_images = existing["dataZones"][dz_name]["images"]
-                n_images_to_add = max_images - len(existing_images)
-                if n_images_to_add > 0:
-                    for image in data_zone["images"][:n_images_to_add]:
-                        existing_images.append(image)
+                for image in data_zone["images"]:
+                    existing_images.append(image)
         return existing
     return metadata
+
+
+def get_n_current_images(data_zone, out_dir):
+    fpath = Path(f"{out_dir}/images.json")
+    if fpath.is_file():
+        with open(fpath, "r", encoding="utf8") as file:
+            existing = json.loads(file.read())
+            existing_images = existing["dataZones"][data_zone]["images"]
+            return len(existing_images)
+    return 0
 
 
 def write_metadata_file(metadata, out_dir):
@@ -289,10 +304,13 @@ def main():
         metadata = filter_404_images(metadata)
         print(json.dumps(metadata, indent=2))
     else:
-        download_images(metadata, fail_fast=args.fail_fast)
-        metadata = merge_metadata_with_existing(
-            metadata, args.out_path, args.max_images
+        download_images(
+            metadata,
+            args.out_path,
+            fail_fast=args.fail_fast,
+            max_images=args.max_images,
         )
+        metadata = merge_metadata_with_existing(metadata, args.out_path)
         metadata = filter_404_images(metadata)
         write_metadata_file(metadata, args.out_path)
 
