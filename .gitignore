@@ -144,8 +144,7 @@ tsconfig.tsbuildinfo
 # large data files
 data/**/*.jpg
 data/models
-models/detectron2/output/model_final.pth
-models/detectron2/output/model_final.pth
+models/detectron2/runs
 models/yolov5/weights
 
 # label studio
