@@ -56,23 +56,24 @@ def download_images(metadata, out_dir, fail_fast=False, max_images=100):
     data_zones = metadata["dataZones"]
     n_data_zones = len(data_zones)
     for i, (dz_name, data_zone) in enumerate(data_zones.items()):
-        print(f"Downloading images from data zone {dz_name} ({i+1}/{n_data_zones})")
         n_current_images = get_n_current_images(dz_name, out_dir)
-        n_images_to_add = max_images - get_n_current_images(dz_name, out_dir)
+        n_images_to_add = max_images - n_current_images
         if n_images_to_add <= 0:
-            print(
-                f"Maximum number of images already reached: {n_current_images}/{max_images}"
-            )
             continue
-        images = data_zone["images"][:n_images_to_add]
+        print(
+            f"Downloading images from data zone {dz_name} with ({n_current_images}/{max_images}) images ({i+1}/{n_data_zones})"
+        )
+        images = data_zone["images"]
+        if len(images) > n_images_to_add:
+            images = images[:n_images_to_add]
         n_images = len(images)
         for j, image in enumerate(images):
-            out_dir, fpath, name = image["dir"], image["path"], image["name"]
+            img_out_dir, fpath, name = image["dir"], image["path"], image["name"]
             print(f"Downloading image {name} ({j+1}/{n_images})")
             if Path(fpath).is_file():
                 print("file already exists")
                 continue
-            os.makedirs(out_dir, exist_ok=True)
+            os.makedirs(img_out_dir, exist_ok=True)
             try:
                 download_image(image)
             except DownloadImageError as err:
@@ -252,7 +253,7 @@ def filter_404_images(metadata):
     return result
 
 
-def merge_metadata_with_existing(metadata, out_dir, max_images=100):
+def merge_metadata_with_existing(metadata, out_dir):
     fpath = Path(f"{out_dir}/images.json")
     if fpath.is_file():
         with open(fpath, "r", encoding="utf8") as file:
@@ -274,7 +275,6 @@ def get_n_current_images(data_zone, out_dir):
             existing = json.loads(file.read())
             existing_images = existing["dataZones"][data_zone]["images"]
             return len(existing_images)
-    return 0
 
 
 def write_metadata_file(metadata, out_dir):
@@ -298,9 +298,7 @@ def main():
         },
     )
     if args.dry_run:
-        metadata = merge_metadata_with_existing(
-            metadata, args.out_path, args.max_images
-        )
+        metadata = merge_metadata_with_existing(metadata, args.out_path)
         metadata = filter_404_images(metadata)
         print(json.dumps(metadata, indent=2))
     else:
