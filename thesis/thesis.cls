@@ -30,9 +30,6 @@
 \usepackage{amsmath,amsfonts,amsbsy,amssymb}
 \usepackage[style]{abstract}
 
-\usepackage{natbib}
-\bibpunct{(}{)}{;}{a}{}{;}
-
 \usepackage{etoolbox}
 \usepackage[compact]{titlesec}
 \usepackage{color}
@@ -95,7 +92,7 @@ textfont=it,tableposition=above]{caption}
 
 \usepackage{subcaption}
 
-\usepackage[top=3.5cm,bottom=4.0cm,left=3.5cm,right=3.5cm]{geometry}
+\usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm]{geometry}
 \setlength{\parskip}{5pt plus 2pt}
 
 \renewcommand\maketitle{
