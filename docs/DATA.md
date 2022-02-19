@@ -44,9 +44,9 @@ The [Scottish Index of Multiple Deprivation](https://www.gov.scot/publications/s
 | Crime                          | crime_count            | Count (Integer)                      | Number of recorded crimes of violence, sexual offences, domestic housebreaking, vandalism, drugs offences, and common assault         |
 | Crime                          | crime_rate             | Rate per 10,000 population (Integer) | Recorded crimes of violence, sexual offences, domestic housebreaking, vandalism, drugs offences, and common assault per 10,000 people |
 | Housing                        | overcrowded_count      | Count (Integer)                      | Number of people in households that are overcrowded                                                                                   |
-| Housing                        | nocentralheat_count    | Count (Integer)                      | Number of people in households without central heating                                                                                |
+| Housing                        | nocentralheating_count    | Count (Integer)                      | Number of people in households without central heating                                                                                |
 | Housing                        | overcrowded_rate       | Percentage (Integer)                 | Percentage of people in households that are overcrowded                                                                               |
-| Housing                        | nocentralheat_rate     | Percentage (Integer)                 | Percentage of people in households without central heating                                                                            |
+| Housing                        | nocentralheating_rate     | Percentage (Integer)                 | Percentage of people in households without central heating                                                                            |
 
 ### Missing Data
 
