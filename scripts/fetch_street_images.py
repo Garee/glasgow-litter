@@ -61,28 +61,31 @@ def download_images(metadata, out_dir, fail_fast=False, max_images=100):
         if n_images_to_add <= 0:
             continue
         print(
-            f"Downloading images from data zone {dz_name} with ({n_current_images}/{max_images}) images ({i+1}/{n_data_zones})"
+            f"Downloading images from data zone {dz_name}"
+            f" with ({n_current_images}/{max_images}) images ({i+1}/{n_data_zones})"
         )
         images = data_zone["images"]
-        if len(images) > n_images_to_add:
-            images = images[:n_images_to_add]
-        n_images = len(images)
-        for j, image in enumerate(images):
-            img_out_dir, fpath, name = image["dir"], image["path"], image["name"]
-            print(f"Downloading image {name} ({j+1}/{n_images})")
-            if Path(fpath).is_file():
-                print("file already exists")
-                continue
-            os.makedirs(img_out_dir, exist_ok=True)
-            try:
-                download_image(image)
-            except DownloadImageError as err:
-                if err.response.status_code == HTTP_STATUS_NOT_FOUND:
-                    print("An image could not be found.")
-                else:
-                    print(err)
-                if fail_fast:
-                    sys.exit(1)
+        try_download_images(images, fail_fast)
+
+
+def try_download_images(images, fail_fast=False):
+    n_images = len(images)
+    for j, image in enumerate(images):
+        img_out_dir, fpath, name = image["dir"], image["path"], image["name"]
+        print(f"Downloading image {name} ({j+1}/{n_images})")
+        if Path(fpath).is_file():
+            print("file already exists")
+            continue
+        os.makedirs(img_out_dir, exist_ok=True)
+        try:
+            download_image(image)
+        except DownloadImageError as err:
+            if err.response.status_code == HTTP_STATUS_NOT_FOUND:
+                print("An image could not be found.")
+            else:
+                print(err)
+            if fail_fast:
+                sys.exit(1)
 
 
 def download_image(image):
@@ -275,6 +278,7 @@ def get_n_current_images(data_zone, out_dir):
             existing = json.loads(file.read())
             existing_images = existing["dataZones"][data_zone]["images"]
             return len(existing_images)
+    return 0
 
 
 def write_metadata_file(metadata, out_dir):

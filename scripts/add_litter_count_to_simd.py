@@ -1,3 +1,6 @@
+# pylint: disable=missing-docstring
+
+
 import argparse
 import glob
 import os
@@ -7,8 +10,8 @@ from pathlib import Path
 
 
 def write_to_simd(simd_path, out_path, counts):
-    with open(simd_path, "r", newline="") as fp:
-        csv_reader = csv.reader(fp)
+    with open(simd_path, "r", newline="", encoding="utf-8") as file_p:
+        csv_reader = csv.reader(file_p)
         header = next(csv_reader)
         header.append("litter")
         rows = [header]
@@ -17,20 +20,20 @@ def write_to_simd(simd_path, out_path, counts):
             row.append(counts[data_zone])
             rows.append(row)
         out_path = os.path.join(out_path, os.path.basename(simd_path))
-        with open(out_path, "w", newline="") as out_fp:
+        with open(out_path, "w", newline="", encoding="utf-8") as out_fp:
             csv_writer = csv.writer(out_fp)
             csv_writer.writerows(rows)
 
 
 def count_data_zones_litter(images_path, labels_path):
     data_zones = {}
-    for f in os.listdir(images_path):
-        data_zone_path = os.path.join(images_path, f)
+    for file in os.listdir(images_path):
+        data_zone_path = os.path.join(images_path, file)
         if os.path.isdir(data_zone_path):
             count = count_data_zone_litter(data_zone_path, labels_path)
-            data_zones[f] = count
+            data_zones[file] = count
         else:
-            data_zones[f] = 0
+            data_zones[file] = 0
     return data_zones
 
 
@@ -47,14 +50,17 @@ def count_data_zone_litter(data_zone_path, labels_path):
         image_name = os.path.basename(image_path)
         image_prefix = image_name.replace(".jpg", "")
         if image_prefix in label_prefixes:
-            with open(label_prefixes[image_prefix], "r") as fp:
-                count += len(fp.readlines())
+            with open(label_prefixes[image_prefix], "r", encoding="utf-8") as file_p:
+                count += len(file_p.readlines())
     return count
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Copy labelled images from data/images to the YOLO export directory."
+        description=(
+            "Creates a modified SIMD CSV file with a `litter` column populated "
+            "with the number of litter objects detected for each data zone."
+        )
     )
     parser.add_argument(
         "images_path",
