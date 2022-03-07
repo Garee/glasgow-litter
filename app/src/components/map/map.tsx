@@ -1,5 +1,5 @@
 import { LatLngExpression } from "leaflet";
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import {
   MapContainer,
   TileLayer,
@@ -8,7 +8,7 @@ import {
 } from "react-leaflet";
 import "./leaflet";
 import "./map.css";
-import * as streetViewImages from "../../../../data/images/images.json";
+import * as streetViewImages from "../../../../data/detected/images.json";
 import * as publicRecyclingPoints from "../../../../data/publicRecyclingPoints.json";
 import { ImageMarker, ImageMarkerProps } from "../image-marker";
 import { PublicRecyclingMarker } from "../public-recycling-marker";
@@ -38,11 +38,6 @@ export const Map: FC<MapProps> = ({
       name: "OpenStreetMap Standard",
       attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-    },
-    {
-      name: "OpenStreetMap Black & White",
-      attribution: `&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors`,
-      url: "https://tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png",
       isDefault: true,
     },
     {
@@ -52,9 +47,9 @@ export const Map: FC<MapProps> = ({
     },
   ],
 } = {}) => {
-  const tileLayerControls = getTileLayerControls(tileLayers);
-  const imageMarkers = getImageMarkers();
-  const publicRecyclingMarkers = getPublicRecyclingMarkers();
+  const [tileLayerControls] = useState(getTileLayerControls(tileLayers));
+  const [imageMarkers] = useState(getImageMarkers());
+  const [publicRecyclingMarkers] = useState(getPublicRecyclingMarkers());
 
   return (
     <MapContainer
@@ -75,10 +70,10 @@ export const Map: FC<MapProps> = ({
             <Wards />
           </LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Image Markers">
+        <LayersControl.Overlay name="Image Markers" checked>
           <LayerGroup>{imageMarkers}</LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Public Recycling Facilities">
+        <LayersControl.Overlay name="Public Recycling Facilities" checked>
           <LayerGroup>{publicRecyclingMarkers}</LayerGroup>
         </LayersControl.Overlay>
       </LayersControl>
@@ -97,22 +92,24 @@ function getTileLayerControls(tileLayers: TileLayer[] = []): JSX.Element[] {
 function getImageMarkers(): JSX.Element[] {
   const imageMarkerData = Object.entries(streetViewImages.dataZones).reduce(
     (acc: ImageMarkerProps[], val) => {
-      const [dataZone, data] = val;
+      const [dataZone, data] = val as any;
       if (!dataZone || !data?.images) {
         return acc;
       }
       return acc.concat(
-        data.images.map(({ lat, lon, width, height, path }) => {
-          return {
-            id: `${lat}_${lon}`,
-            dataZone,
-            lat,
-            lon,
-            width,
-            height,
-            path,
-          };
-        })
+        data.images
+          .slice(0, 1)
+          .map(({ lat, lon, width, height, path }: any) => {
+            return {
+              id: `${lat}_${lon}`,
+              dataZone,
+              lat,
+              lon,
+              width,
+              height,
+              path,
+            };
+          })
       );
     },
     []

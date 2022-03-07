@@ -144,6 +144,7 @@ tsconfig.tsbuildinfo
 # large data files
 data/**/*.jpg
 data/models
+data/detected
 models/detectron2/runs
 models/yolov5/weights
 
