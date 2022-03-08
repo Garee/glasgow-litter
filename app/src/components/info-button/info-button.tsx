@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { IconButton, useDisclosure } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import "./info-button.css";
@@ -8,6 +8,10 @@ type InfoButtonProps = Record<string, never>;
 
 export const InfoButton: FC<InfoButtonProps> = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
+
+  useEffect(() => {
+    onToggle();
+  }, []);
 
   return (
     <>
