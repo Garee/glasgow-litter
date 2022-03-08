@@ -26,6 +26,9 @@ export const PublicRecyclingMarker: FC<PublicRecyclingMarkerProps> = ({
   return (
     <Marker position={position} icon={icon}>
       <Popup>
+        <strong>Public Recycling Point</strong>
+        <hr />
+        <br />
         <strong>{name}</strong>
         <br />
         <br />

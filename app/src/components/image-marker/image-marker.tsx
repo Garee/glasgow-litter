@@ -36,7 +36,10 @@ export const ImageMarker: FC<ImageMarkerProps> = ({
   return (
     <Marker position={position} icon={icon}>
       <Popup maxWidth={maxPopupWidth}>
-        <strong>Data Zone {dataZone}</strong>
+        <strong>Litter</strong>
+        <hr />
+        <br />
+        <strong>Data Zone: {dataZone}</strong>
         <br />
         <br />
         <span>Latitude: {lat}</span>
