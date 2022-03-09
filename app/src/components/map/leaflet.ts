@@ -1,5 +1,6 @@
 import * as L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import "react-leaflet-markercluster/dist/styles.min.css";
 
 // Required to load the leaflet.css images.
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

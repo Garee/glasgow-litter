@@ -24,22 +24,23 @@ export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
     <Modal isOpen={isOpen} onClose={onClose} size={"xl"} isCentered>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Litter Object Detection In Glasgow City</ModalHeader>
+        <ModalHeader>Litter Object Detection In Glasgow City 🚯</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Stack>
             <Text>
               Welcome! This is an interactive visualisation of litter on the
-              streets of Glasgow City.
+              streets of Glasgow City. It is part of a research project which
+              aims to discover relationships between deprivation and litter.
             </Text>
             <Text>
               A neural network based object detection model has been applied to
-              thousands of Google Street View images. A subset of those images
-              in which litter has been detected are marked on the map.
+              thousands of Google Street View images. Those images in which
+              litter has been detected are marked on this map.
             </Text>
             <Text>
               The coloured regions represent each of the city&apos;s 23 wards.
-              Hover over them to reveal their name.
+              Hover over them to reveal their names.
             </Text>
             <Text>
               Each ward contains many data zones which are outlined in black.
@@ -54,14 +55,14 @@ export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
               </Link>{" "}
               study.
             </Text>
+            <Text>Zoom into a cluster to reveal the markers within.</Text>
             <Text>
               Click on a{" "}
               <img
                 src="litter.png"
                 style={{ display: "inline", height: "20px" }}
               />{" "}
-              marker to reveal detected litter. Each data zone has been limited
-              to a single litter marker for clarity.
+              marker to view the detected litter on the street view image.
             </Text>
             <Text>
               In addition to litter, the available public recycling facilities
@@ -83,7 +84,7 @@ export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
               <Link href="https://github.com/garee/glasgow-litter" isExternal>
                 Github <ExternalLinkIcon mx="2px" />
               </Link>
-              .
+              . Please visit to find out more.
             </Text>
           </Stack>
         </ModalBody>

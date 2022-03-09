@@ -6,6 +6,7 @@ import {
   LayersControl,
   LayerGroup,
 } from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import "./leaflet";
 import "./map.css";
 import * as streetViewImages from "../../../../data/detected/images.json";
@@ -48,8 +49,8 @@ export const Map: FC<MapProps> = ({
   ],
 } = {}) => {
   const [tileLayerControls] = useState(getTileLayerControls(tileLayers));
-  const [imageMarkers] = useState(getImageMarkers());
-  const [publicRecyclingMarkers] = useState(getPublicRecyclingMarkers());
+  const [imageMarkers] = useState(getImageMarkersGroup());
+  const [publicRecyclingMarkers] = useState(getPublicRecyclingMarkersGroup());
 
   return (
     <MapContainer
@@ -89,7 +90,7 @@ function getTileLayerControls(tileLayers: TileLayer[] = []): JSX.Element[] {
   ));
 }
 
-function getImageMarkers(): JSX.Element[] {
+function getImageMarkersGroup(): JSX.Element {
   const imageMarkerData = Object.entries(streetViewImages.dataZones).reduce(
     (acc: ImageMarkerProps[], val) => {
       const [dataZone, data] = val as any;
@@ -97,30 +98,30 @@ function getImageMarkers(): JSX.Element[] {
         return acc;
       }
       return acc.concat(
-        data.images
-          .slice(0, 1)
-          .map(({ lat, lon, width, height, path }: any) => {
-            return {
-              id: `${lat}_${lon}`,
-              dataZone,
-              lat,
-              lon,
-              width,
-              height,
-              path,
-            };
-          })
+        data.images.map(({ lat, lon, width, height, path }: any) => {
+          return {
+            id: `${lat}_${lon}`,
+            dataZone,
+            lat,
+            lon,
+            width,
+            height,
+            path,
+          };
+        })
       );
     },
     []
   );
 
-  return imageMarkerData.map((props) => (
+  const markers = imageMarkerData.map((props) => (
     <ImageMarker {...props} key={props.id} />
   ));
+
+  return <MarkerClusterGroup>{markers}</MarkerClusterGroup>;
 }
 
-function getPublicRecyclingMarkers(): JSX.Element[] {
+function getPublicRecyclingMarkersGroup(): JSX.Element {
   const publicRecyclingMarkerData = publicRecyclingPoints.features.map(
     (feature) => {
       const lat = feature.geometry.y;
@@ -137,7 +138,9 @@ function getPublicRecyclingMarkers(): JSX.Element[] {
     }
   );
 
-  return publicRecyclingMarkerData.map((props) => (
+  const markers = publicRecyclingMarkerData.map((props) => (
     <PublicRecyclingMarker {...props} key={props.id} />
   ));
+
+  return <MarkerClusterGroup>{markers}</MarkerClusterGroup>;
 }
