@@ -10,7 +10,7 @@ export const InfoButton: FC<InfoButtonProps> = () => {
   const { isOpen, onToggle, onClose } = useDisclosure();
 
   useEffect(() => {
-    //onToggle();
+    onToggle();
   }, []);
 
   return (
