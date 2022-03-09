@@ -19,7 +19,8 @@ export const InfoButton: FC<InfoButtonProps> = () => {
         <IconButton
           aria-label="About"
           icon={<InfoIcon />}
-          colorScheme={"teal"}
+          colorScheme="teal"
+          variant="outline"
           onClick={onToggle}
         />
       </span>

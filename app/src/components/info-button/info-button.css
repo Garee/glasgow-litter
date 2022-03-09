@@ -4,3 +4,7 @@
   left: 0.75rem;
   z-index: 999;
 }
+
+.info-button button {
+  background: white;
+}

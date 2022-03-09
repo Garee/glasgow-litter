@@ -21,10 +21,16 @@ export interface InfoModalProps {
 
 export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={"xl"} isCentered>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size={"lg"}
+      scrollBehavior={"inside"}
+      isCentered
+    >
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Litter Object Detection In Glasgow City 🚯</ModalHeader>
+        <ModalHeader>Glasgow&apos;s Litter 🚯</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <Stack>
@@ -53,7 +59,8 @@ export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
                 Scottish Index of Multiple Deprivation
                 <ExternalLinkIcon mx="2px" />
               </Link>{" "}
-              study.
+              study. It is these deprivation measures this this project seeks to
+              relate to the amount of litter on the streets.
             </Text>
             <Text>Zoom into a cluster to reveal the markers within.</Text>
             <Text>
@@ -85,6 +92,13 @@ export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
                 Github <ExternalLinkIcon mx="2px" />
               </Link>
               . Please visit to find out more.
+            </Text>
+            <Text>
+              Please get in touch with me at{" "}
+              <Link href="mailto:gary@garyblackwood.co.uk" isExternal>
+                gary@garyblackwood.co.uk
+              </Link>{" "}
+              if you would like to know more.
             </Text>
           </Stack>
         </ModalBody>
