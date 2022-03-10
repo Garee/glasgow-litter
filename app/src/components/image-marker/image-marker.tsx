@@ -1,4 +1,9 @@
-import { Icon, LatLngExpression, LeafletMouseEventHandlerFn } from "leaflet";
+import {
+  Icon,
+  latLng,
+  LatLngExpression,
+  LeafletMouseEventHandlerFn,
+} from "leaflet";
 import React, { FC } from "react";
 import { Marker, Popup } from "react-leaflet";
 import "./image-marker.css";
@@ -33,7 +38,9 @@ export const ImageMarker: FC<ImageMarkerProps> = ({
   });
 
   const onMarkerClick: LeafletMouseEventHandlerFn = (e) => {
-    e.target._map.panTo(e.latlng);
+    const map = e.target._map;
+    const { lat, lng } = e.latlng;
+    map.flyTo(latLng(lat, lng));
   };
 
   const maxPopupWidth = undefined; // 100%
