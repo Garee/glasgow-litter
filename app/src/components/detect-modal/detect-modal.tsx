@@ -42,8 +42,8 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
 
     const formData = new FormData();
     formData.append("confidence", `${confidence}`);
-    formData.append("hideConfidence", `${hideConfidence}`);
-    formData.append("hideLabels", `${hideLabels}`);
+    formData.append("hide_confidence", `${hideConfidence}`);
+    formData.append("hide_labels", `${hideLabels}`);
     if (imageFile) {
       formData.append("image", imageFile);
     }
