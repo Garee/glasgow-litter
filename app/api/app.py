@@ -15,12 +15,19 @@ YOLO_DIR = os.environ.get("YOLO_DIR", "/yolov5")
 app = Flask(__name__)
 
 
+@app.after_request
+def after_request(response):
+    headers = response.headers
+    headers["Access-Control-Allow-Origin"] = "*"
+    return response
+
+
 @app.route("/detect", methods=["POST"])
 def detect():
     if len(request.files) == 0:
         return "Missing image file upload.", 400
     image_file = request.files["image"]
-    confidence = request.form.get("confidence", "0.8")
+    confidence = request.form.get("confidence", "0.5")
     hide_confidence = request.form.get("hide_confidence", True)
     hide_labels = request.form.get("hide_labels", True)
     uuid = str(uuid4())
@@ -43,9 +50,9 @@ def detect():
         "--conf",
         confidence,
     ]
-    if hide_labels:
+    if hide_labels == "true":
         cmd.append("--hide-labels")
-    if hide_confidence:
+    if hide_confidence == "true":
         cmd.append("--hide-conf")
     print(cmd)
     with subprocess.Popen(cmd) as pid:

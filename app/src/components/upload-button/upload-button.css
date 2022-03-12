@@ -1,0 +1,6 @@
+.upload-button {
+  position: absolute;
+  bottom: 1rem;
+  left: 7.5rem;
+  z-index: 999;
+}

@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { IconButton, useDisclosure } from "@chakra-ui/react";
+import { Button, useDisclosure } from "@chakra-ui/react";
 import { InfoIcon } from "@chakra-ui/icons";
 import "./info-button.css";
 import { InfoModal } from "../info-modal";
@@ -16,13 +16,15 @@ export const InfoButton: FC<InfoButtonProps> = () => {
   return (
     <>
       <span className="info-button">
-        <IconButton
+        <Button
           aria-label="About"
-          icon={<InfoIcon />}
+          rightIcon={<InfoIcon />}
           colorScheme="teal"
           variant="outline"
           onClick={onToggle}
-        />
+        >
+          Help
+        </Button>
       </span>
       <InfoModal isOpen={isOpen} onClose={onClose} />
     </>
