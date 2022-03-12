@@ -53,10 +53,15 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
       fetch(fname)
         .then((res) => res.blob())
         .then((blob) => {
-          formData.append("image", new File([blob], fname));
+          const file = new File([blob], fname);
+          setImageFile(file);
+          formData.append("image", file);
           detect(formData);
         })
-        .catch(() => setLoading(false));
+        .catch(() => {
+          setLoading(false);
+          setCanDetect(true);
+        });
     } else {
       detect(formData);
     }
@@ -74,11 +79,13 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
           setImgSrc(imgSrc);
         }
       })
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+        setCanDetect(true);
+      });
   }
 
   function onUpload() {
-    setCanDetect(false);
     fileInput?.current?.click();
   }
 
@@ -97,8 +104,6 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
             }
           });
         }
-
-        setCanDetect(true);
       };
       reader.readAsDataURL(file);
     }
