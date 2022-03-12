@@ -63,7 +63,7 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
   }
 
   function detect(formData: FormData) {
-    fetch("http://localhost:5000/detect", {
+    fetch("/api/detect", {
       method: "POST",
       body: formData,
     })
@@ -85,18 +85,41 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
   function onFileInputChange() {
     const files = fileInput?.current?.files;
     if (files) {
-      setImageFile(files[0]);
+      const file = files[0];
+      setImageFile(file);
       const reader = new FileReader();
       reader.onload = (e: ProgressEvent<FileReader>) => {
         const result = e.target?.result;
-        if (typeof result === "string" && image.current) {
-          image.current.src = result;
+        if (typeof result === "string") {
+          resizeImg(result, file).then((result) => {
+            if (image.current) {
+              image.current.src = result;
+            }
+          });
         }
 
         setCanDetect(true);
       };
-      reader.readAsDataURL(files[0]);
+      reader.readAsDataURL(file);
     }
+  }
+
+  function resizeImg(src: string, file: File): Promise<string> {
+    const img = document.createElement("img");
+    return new Promise((resolve) => {
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        canvas.width = 640;
+        canvas.height = 640;
+
+        const ctx = canvas.getContext("2d");
+        ctx?.drawImage(img, 0, 0, 640, 640);
+
+        resolve(canvas.toDataURL(file.type));
+      };
+
+      img.src = src;
+    });
   }
 
   function onHideConfidenceChange() {
