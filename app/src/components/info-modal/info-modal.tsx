@@ -83,8 +83,12 @@ export const InfoModal: FC<InfoModalProps> = ({ isOpen, onClose }) => {
             <Text>
               The ward, data zone, and marker layer visibility can be toggled
               using the control on the top right of the screen. This dialog can
-              be launched again by pressing the information button on the bottom
-              left.
+              be launched again by pressing the &quot;Help&quot; button on the
+              bottom left.
+            </Text>
+            <Text>
+              You can try running the litter object detection model on a sample
+              image by pressing the &quot;Detect&quot; button.
             </Text>
             <Text>
               The project is open source and hosted on{" "}
