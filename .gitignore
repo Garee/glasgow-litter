@@ -137,6 +137,8 @@ node_modules/
 # app
 build/
 tsconfig.tsbuildinfo
+app/api/uploads
+app/api/detect
 
 # nodist
 .node-version

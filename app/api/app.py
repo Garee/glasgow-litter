@@ -10,7 +10,7 @@ from werkzeug.utils import secure_filename
 MODEL_DIR = os.environ.get("MODEL_DIR", "./model")
 UPLOAD_DIR = os.environ.get("UPLOAD_DIR", "./uploads")
 DETECT_DIR = os.environ.get("DETECT_DIR", "./detect")
-YOLO_DIR = os.environ.get("YOLO_DIR", "../../models/yolov5/yolov5")
+YOLO_DIR = os.environ.get("YOLO_DIR", "/yolov5")
 
 app = Flask(__name__)
 
