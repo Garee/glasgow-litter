@@ -136,9 +136,15 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
   }
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} size={"lg"} isCentered>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      size={"lg"}
+      isCentered
+      scrollBehavior={"inside"}
+    >
       <ModalOverlay />
-      <ModalContent maxW="700px" maxH="1000px">
+      <ModalContent maxW="700px">
         <ModalHeader>Detect Litter</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
