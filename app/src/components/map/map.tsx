@@ -19,6 +19,7 @@ import { Wards } from "../wards";
 export interface MapProps {
   center?: LatLngExpression;
   zoom?: number;
+  maxZoom?: number;
   scrollWheelZoom?: boolean;
   tileLayers?: TileLayer[];
 }
@@ -33,6 +34,7 @@ export interface TileLayer {
 export const Map: FC<MapProps> = ({
   center = [55.865, -4.257], // Glasgow City
   zoom = 12,
+  maxZoom = 20,
   scrollWheelZoom = true,
   tileLayers = [
     {
@@ -56,6 +58,7 @@ export const Map: FC<MapProps> = ({
     <MapContainer
       center={center}
       zoom={zoom}
+      maxZoom={maxZoom}
       scrollWheelZoom={scrollWheelZoom}
       className="map"
     >
