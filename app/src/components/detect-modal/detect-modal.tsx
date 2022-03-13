@@ -187,11 +187,7 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
               </SliderTrack>
               <SliderThumb boxSize={6} />
             </Slider>
-            <Checkbox
-              defaultChecked
-              onChange={onHideConfidenceChange}
-              colorScheme="teal"
-            >
+            <Checkbox onChange={onHideConfidenceChange} colorScheme="teal">
               Hide Confidence
             </Checkbox>
             <Checkbox
