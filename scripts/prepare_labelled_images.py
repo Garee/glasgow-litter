@@ -1,6 +1,7 @@
 # pylint: disable=missing-docstring
 
 import os
+import re
 import json
 import argparse
 import glob
@@ -26,6 +27,8 @@ def create_metadata(yolo_path):
             images = dz_info["images"]
             for image in images:
                 if name.endswith(image["name"]):
+                    image["dir"] = re.sub("images/S[0-9]*", "detected", image["dir"])
+                    image["path"] = re.sub("images/S[0-9]*", "detected", image["path"])
                     labels["dataZones"][dz_name]["images"].append(image)
     with open(labels_dir / "images.json", mode="w", encoding="utf-8") as file:
         file.write(json.dumps(labels))
