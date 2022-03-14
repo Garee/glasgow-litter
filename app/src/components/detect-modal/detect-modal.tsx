@@ -29,7 +29,7 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [canDetect, setCanDetect] = useState(true);
   const [confidence, setConfidence] = useState(0.25);
-  const [hideConfidence, setHideConfidence] = useState(true);
+  const [hideConfidence, setHideConfidence] = useState(false);
   const [hideLabels, setHideLabels] = useState(true);
   const [imageFile, setImageFile] = useState<File>();
   const [imgSrc, setImgSrc] = useState("example.jpg");
