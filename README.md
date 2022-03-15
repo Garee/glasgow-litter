@@ -2,6 +2,8 @@
 
 A project that explores the relationship between deprivation and litter in Glasgow City.
 
+![Glasgow's Litter](./images/glasgow-litter.png)
+
 ## Objective
 
 Identify the relationship, if any, between an area of Glasgow's deprivation and the amount of litter present on its streets.
