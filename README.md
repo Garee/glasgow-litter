@@ -1,6 +1,6 @@
-# Glasgow Litter 🌟
+# Glasgow Litter 🚯
 
-A project that explores the relationship between deprivation and litter in Glasgow City.
+A research project that explores the relationships between deprivation and litter in Glasgow City.
 
 ![Glasgow's Litter](./images/glasgow-litter.png)
 

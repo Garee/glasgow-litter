@@ -44,9 +44,9 @@ The [Scottish Index of Multiple Deprivation](https://www.gov.scot/publications/s
 | Crime                          | crime_count            | Count (Integer)                      | Number of recorded crimes of violence, sexual offences, domestic housebreaking, vandalism, drugs offences, and common assault         |
 | Crime                          | crime_rate             | Rate per 10,000 population (Integer) | Recorded crimes of violence, sexual offences, domestic housebreaking, vandalism, drugs offences, and common assault per 10,000 people |
 | Housing                        | overcrowded_count      | Count (Integer)                      | Number of people in households that are overcrowded                                                                                   |
-| Housing                        | nocentralheating_count    | Count (Integer)                      | Number of people in households without central heating                                                                                |
+| Housing                        | nocentralheating_count | Count (Integer)                      | Number of people in households without central heating                                                                                |
 | Housing                        | overcrowded_rate       | Percentage (Integer)                 | Percentage of people in households that are overcrowded                                                                               |
-| Housing                        | nocentralheating_rate     | Percentage (Integer)                 | Percentage of people in households without central heating                                                                            |
+| Housing                        | nocentralheating_rate  | Percentage (Integer)                 | Percentage of people in households without central heating                                                                            |
 
 ### Missing Data
 
@@ -61,6 +61,14 @@ A value of 100 is the Scotland average for a population with the same age and se
 ## [glasgow-simd2020v2.csv](../data/glasgow-simd2020v2.csv)
 
 The subset of simd2020v2.xlsx observations with `Council_area` equal to `Glasgow City`. There are 747 observations and 137 missing feature values.
+
+## [glasgow-simd2020v2-extended.csv](../data/glasgow-simd2020v2-extended.csv)
+
+An extended version of [glasgow-simd2020v2.csv](../data/glasgow-simd2020v2.csv) with two additional columns:
+
+1. **litter**: The number of litter objects detected in 50 street view images of the data zone.
+
+2. **public_recycling_points**: The total number of public recycling points in the data zone.
 
 ## [publicRecyclingPoints.json](../data/publicRecylingPoints.json)
 
