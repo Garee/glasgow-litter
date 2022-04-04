@@ -74,7 +74,7 @@ export const Map: FC<MapProps> = ({
             <Wards />
           </LayerGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name="Image Markers" checked>
+        <LayersControl.Overlay name="Litter" checked>
           <LayerGroup>{imageMarkers}</LayerGroup>
         </LayersControl.Overlay>
         <LayersControl.Overlay name="Public Recycling Facilities" checked>
