@@ -1,6 +1,31 @@
 # pylint: disable=missing-docstring
 
+"""
+usage: add_public_recycling_count_to_simd.py [-h] [--debug]
+  data_zone_path public_recycling_path simd_path out_path
 
+Creates a modified SIMD CSV file with a `public_recycling_points` column populated with the number
+of public recycling points within each data zone.
+
+positional arguments:
+  data_zone_path        path to the data zone geojson file
+  public_recycling_path
+                        path to the public recycling points file
+  simd_path             path to the SIMD CSV file
+  out_path              directory path to output the updated SIMD CSV file
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --debug               enable debug logging
+
+example usage:
+
+  python scripts/add_public_recycling_count_to_simd.py
+    data/geojson/glasgow-data-zones.geojson.json
+    data/publicRecyclingPoints.json
+    data/glasgow-simd2020v2.csv
+    .
+"""
 import argparse
 import os
 import csv

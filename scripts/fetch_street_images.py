@@ -23,6 +23,10 @@ optional arguments:
                         data zones for which images should be downloaded
   --dry-run             output a JSON object that describes the images that would be downloaded
   --fail-fast           do not continue upon failure to download an image
+
+example usage:
+
+  python scripts/fetch_street_images.py --n-images 50 data/images
 """
 import os
 import sys

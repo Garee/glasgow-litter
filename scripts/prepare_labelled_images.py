@@ -1,5 +1,22 @@
 # pylint: disable=missing-docstring
 
+"""
+usage: prepare_labelled_images.py [-h] [--metadata-only] yolo_path
+
+Prepare labelled images for the companion web app.
+
+positional arguments:
+  yolo_path        directory path in which the YOLO detected labels are stored
+
+optional arguments:
+  -h, --help       show this help message and exit
+  --metadata-only  skip copying images and only generate the metadata file
+
+example usage:
+
+  python scripts/prepare_labelled_images.py models/yolov5/yolov5/runs/detect/exp
+"""
+
 import os
 import re
 import json

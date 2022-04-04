@@ -9,6 +9,10 @@ positional arguments:
 optional arguments:
   -h, --help  show this help message and exit
 
+example usage:
+
+  python scripts/fetch_public_recycling_points.py data/publicRecyclingPoints.json
+
 Source: https://www.glasgow.gov.uk/index.aspx?articleid=16569
 """
 import sys

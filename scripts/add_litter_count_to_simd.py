@@ -1,6 +1,29 @@
 # pylint: disable=missing-docstring
 
+"""
+usage: add_litter_count_to_simd.py [-h] [--debug] images_path labels_path simd_path out_path
 
+Creates a modified SIMD CSV file with a `litter` column populated with the number of litter objects
+detected for each data zone.
+
+positional arguments:
+  images_path  directory path that contains the source images
+  labels_path  directory path that contains the litter labels
+  simd_path    path to the SIMD CSV file
+  out_path     directory path to output the updated SIMD CSV file
+
+optional arguments:
+  -h, --help   show this help message and exit
+  --debug      enable debug logging
+
+example usage:
+
+  python scripts/add_litter_count_to_simd.py
+    data/images-expanded
+    models/yolov5/yolov5/runs/detect/exp/labels
+    data/glasgow-simd2020v2.csv
+    .
+"""
 import argparse
 import glob
 import os
