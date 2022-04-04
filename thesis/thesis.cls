@@ -6,6 +6,9 @@
 
 \usepackage{iftex}
 
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+
 \ifPDFTeX
   \usepackage{fbb}
   \usepackage{FiraMono}
