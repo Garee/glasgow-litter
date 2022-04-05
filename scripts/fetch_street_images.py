@@ -27,6 +27,8 @@ optional arguments:
 example usage:
 
   python scripts/fetch_street_images.py --n-images 50 data/images
+
+The GOOGLE_MAPS_API_KEY environment variable must be set in the .env file.
 """
 import os
 import sys

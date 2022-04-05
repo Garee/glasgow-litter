@@ -18,9 +18,15 @@ A companion web application is included that allows users to interactively explo
 
 More information can be found in [APP.md](docs/APP.md).
 
-## Object Detection and Regression
+## Object Detection
 
-The `models` and `regression` directories contain the code used to obtain the litter counts and perform data analysis.
+The notebooks in the `models/yolov5` directory are used to develop YoloV5 object detection models for the purposes of litter detection.
+
+Similarly, the notebooks in the `models/detectron2` directory are used to train Faster R-CNN models with the same objective.
+
+## Regression
+
+The notebooks in the `regression` directory apply count data regression models such as Poisson and Negative Binomial to the extended SIMD data set described in [DATA.md](docs/DATA.md).
 
 ## Dependencies
 
