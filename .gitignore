@@ -150,7 +150,6 @@ data/detected
 data/detected*
 data/mosaic*
 models/detectron2/runs
-models/yolov5/weights
 
 # label studio
 data/label-studio/export
