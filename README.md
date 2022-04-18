@@ -14,19 +14,19 @@ The project's data sources can be found in the `data` directory and are describe
 
 ## App
 
-A companion web application is included that allows users to interactively explore the litter objects detected throughout the city.
+A companion [web application](https://glasgow-litter.garyblackwood.co.uk) is included that allows users to interactively explore the litter objects detected throughout the city.
 
 More information can be found in [APP.md](docs/APP.md).
 
 ## Object Detection
 
-The notebooks in the `models/yolov5` directory are used to develop YoloV5 object detection models for the purposes of litter detection.
+The notebooks in the `models/yolov5` directory are used to develop YOLOv5s object detection models for the purposes of litter detection.
 
 Similarly, the notebooks in the `models/detectron2` directory are used to train Faster R-CNN models with the same objective.
 
 ## Regression
 
-The notebooks in the `regression` directory apply count data regression models such as Poisson and Negative Binomial to the extended SIMD data set described in [DATA.md](docs/DATA.md).
+The notebook in the `regression` directory applies count data regression models such as Poisson and Negative Binomial to the extended SIMD data set described in [DATA.md](docs/DATA.md).
 
 ## Dependencies
 
@@ -59,9 +59,9 @@ export LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=<path_to_data>
 bin/label-studio.exe --data-dir data/label-studio
 ```
 
-## Thesis
+## Report
 
-The source code for the thesis can be found in the `thesis` directory. This is currently a work in progress.
+The source code for the report can be found in the `report` directory. This is currently a work in progress.
 
 ## Acknowledgements
 
