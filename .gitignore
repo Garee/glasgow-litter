@@ -146,8 +146,9 @@ app/api/detect
 # large data files
 data/**/*.jpg
 data/models
-data/detected
-data/detected*
+data/detected/*.jpg
+data/detected/*.txt
+data/*.zip
 data/mosaic*
 models/detectron2/runs
 

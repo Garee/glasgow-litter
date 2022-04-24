@@ -34,20 +34,19 @@ from pathlib import Path
 from shapely.geometry import shape, Point
 
 
-def write_to_simd(simd_path, out_path, counts):
+def add_to_simd(simd_path, out_path, counts):
     with open(simd_path, "r", newline="", encoding="utf-8") as file_p:
         csv_reader = csv.reader(file_p)
         header = next(csv_reader)
         header.append("public_recycling_points")
         rows = [header]
         for row in csv_reader:
-            data_zone = row[0]
-            row.append(counts[data_zone])
+            row.append(counts[row[0]])
             rows.append(row)
         out_path = os.path.join(out_path, os.path.basename(simd_path))
         with open(out_path, "w", newline="", encoding="utf-8") as out_fp:
-            csv_writer = csv.writer(out_fp)
-            csv_writer.writerows(rows)
+            writer = csv.writer(out_fp)
+            writer.writerows(rows)
 
 
 def count_public_recycling_points_in_data_zones(data_zone_path, public_recycling_path):
@@ -89,12 +88,12 @@ def parse_args():
     parser.add_argument(
         "simd_path",
         type=Path,
-        help="path to the SIMD CSV file",
+        help="path to the SIMD .csv file",
     )
     parser.add_argument(
         "out_path",
         type=Path,
-        help="directory path to output the updated SIMD CSV file",
+        help="directory path to output the updated SIMD .csv file",
     )
     parser.add_argument("--debug", action="store_true", help="enable debug logging")
     return parser.parse_args()
@@ -108,7 +107,7 @@ def main():
     if args.debug:
         print(json.dumps(counts, indent=2))
     else:
-        write_to_simd(args.simd_path, args.out_path, counts)
+        add_to_simd(args.simd_path, args.out_path, counts)
 
 
 if __name__ == "__main__":

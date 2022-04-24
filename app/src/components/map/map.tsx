@@ -96,12 +96,12 @@ function getTileLayerControls(tileLayers: TileLayer[] = []): JSX.Element[] {
 function getImageMarkersGroup(): JSX.Element {
   const imageMarkerData = Object.entries(streetViewImages.dataZones).reduce(
     (acc: ImageMarkerProps[], val) => {
-      const [dataZone, data] = val as any;
+      const [dataZone, data] = val;
       if (!dataZone || !data?.images) {
         return acc;
       }
       return acc.concat(
-        data.images.map(({ lat, lon, width, height, path }: any) => {
+        data.images.map(({ lat, lon, width, height, path }) => {
           return {
             id: `${lat}_${lon}`,
             dataZone,
