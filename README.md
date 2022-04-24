@@ -41,6 +41,8 @@ source venv/Scripts/activate # linux/macOS: source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+Open the object detection and regression notebooks in [Visual Studio Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) or [JupyterLab](https://jupyter.org/install).
+
 ## Scripts
 
 There are utility scripts within the `scripts` directory that can be used for data collection and preparation.
