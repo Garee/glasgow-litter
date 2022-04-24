@@ -47,22 +47,14 @@ There are utility scripts within the `scripts` directory that can be used for da
 
 More information can be found in the header comment of each script.
 
-## Annotations
-
-Image annotations were added using [Label Studio](https://labelstud.io/).
-
-Run Label Studio:
-
-```bash
-export LABEL_STUDIO_LOCAL_FILES_SERVING_ENABLED=true
-export LABEL_STUDIO_LOCAL_FILES_DOCUMENT_ROOT=<path_to_data>
-bin/label-studio.exe --data-dir data/label-studio
-```
-
 ## Report
 
 The source code for the report can be found in the `report` directory. This is currently a work in progress.
 
 ## Acknowledgements
+
+Image annotations were added using [Label Studio](https://labelstud.io/).
+
+Image augmentations were applied using [Roboflow](https://roboflow.com/features#transform).
 
 Icons sourced from [iconmonstr](https://iconmonstr.com/license/).
