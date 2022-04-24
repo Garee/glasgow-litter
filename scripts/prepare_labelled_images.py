@@ -1,4 +1,4 @@
-# pylint: disable=missing-docstring
+# pylint: disable=missing-function-docstring
 
 """
 usage: prepare_labelled_images.py [-h] [--metadata-only] yolo_path

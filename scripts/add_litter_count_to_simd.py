@@ -1,4 +1,4 @@
-# pylint: disable=missing-docstring
+# pylint: disable=missing-function-docstring
 
 """
 usage: add_litter_count_to_simd.py [-h] [--debug] images_path labels_path simd_path out_path

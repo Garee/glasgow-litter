@@ -1,4 +1,4 @@
-# pylint: disable=missing-docstring
+# pylint: disable=missing-function-docstring
 
 """
 usage: add_public_recycling_count_to_simd.py [-h] [--debug]
