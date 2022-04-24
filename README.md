@@ -32,12 +32,20 @@ The notebook in the `regression` directory applies count data regression models 
 
 1. [Python 3.9.6](https://www.python.org/downloads)
 2. [CUDA Toolkit 11.3](https://developer.nvidia.com/cuda-11.3.0-download-archive)
-
-Create a virtual environment and and install the required python packages:
+3. [PyTorch 1.11.0](https://pytorch.org/get-started/locally/) for YOLOv5 models
+4. [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html) for Faster R-CNN models
 
 ```bash
-python -m venv venv --prompt glasgow-litter
-source venv/Scripts/activate # linux/macOS: source venv/bin/activate
+# Create the virtual environment
+python -m venv venv
+
+# Activate the virtual environment
+source venv/Scripts/activate # source venv/bin/activate # linux/macOS
+
+# Install PyTorch (requires CUDA Toolkit 11.3)
+pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
+
+# Install remaining dependencies
 pip install -r requirements.txt
 ```
 

@@ -22,7 +22,6 @@ Cython==0.29.26
 debugpy==1.5.1
 decorator==5.1.0
 Deprecated==1.2.13
--e git+https://github.com/facebookresearch/detectron2@6886f85baee349556749680ae8c85cdba1782d8e#egg=detectron2&subdirectory=..\..\..\..\models\detectron2\detectron2
 Django==3.1.14
 docker-pycreds==0.4.0
 entrypoints==0.3
@@ -98,7 +97,6 @@ pyrsistent==0.18.0
 python-dateutil==2.8.1
 python-dotenv==0.19.1
 pytz==2019.3
-pywin32==303
 PyYAML==6.0
 pyzmq==22.3.0
 redis==4.1.4
@@ -110,7 +108,7 @@ rsa==4.8
 ruamel.yaml==0.17.21
 ruamel.yaml.clib==0.2.6
 s3transfer==0.3.7
-scikit-learn==1.0.1
+scikit-learn==1.0.2
 scipy==1.7.3
 seaborn==0.11.2
 semver==2.13.0
@@ -134,9 +132,6 @@ thop==0.0.31.post2005241907
 threadpoolctl==3.0.0
 toml==0.10.2
 tomli==1.2.2
-torch==1.10.1+cu113
-torchaudio==0.10.1+cu113
-torchvision==0.11.2+cu113
 tornado==6.1
 tqdm==4.62.3
 traitlets==5.1.1
