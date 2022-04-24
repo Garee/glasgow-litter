@@ -76,12 +76,24 @@ The location and details of over 700 communal public recycling facilities in Gla
 
 It was scraped from the public [Map](https://glasgowgis.maps.arcgis.com/apps/webappviewer/index.html?id=345f389a91ff4f1fa193b24df832fb05) hosted by [Glasgow City Council](https://www.glasgow.gov.uk/index.aspx?articleid=16569).
 
+## [geojson](../data/geojson)
+
+This directory contains GeoJSON information about the wards and data zones within Glasgow City. They are used to render the associated app's map.
+
 ## [images](../data/images)
 
 This directory contains Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 640x640 pixel resolution, which is the maximum size the API offers.
 
-Download this [zip file](https://drive.protonmail.com/urls/Y5X69BEMVW#gfOt0gnJXgdY) and extract the images. They are not stored in this repository due to size constraints.
+Download this [zip file](https://drive.protonmail.com/urls/KAH7FQ1KE0#15LfLtJKUynP) and extract the images. They are not stored in this repository due to size constraints.
 
-## [geojson](../data/geojson)
+## [models](../data/models)
 
-This directory contains GeoJSON information about the wards and data zones within Glasgow City. They are used to render the associated app's map.
+This directory contains the train/valid/test images for each attempted model.
+
+Download this [zip file](https://drive.protonmail.com/urls/KAH7FQ1KE0#15LfLtJKUynP) and extract it within the `models` directory. These are the images for the chosen YOLOv5s model and they are not stored in this repository due to size constraints.
+
+## [detected](../data/detected)
+
+This directory contains the images and labels for detected litter.
+
+Download this [zip file](https://drive.protonmail.com/urls/KAH7FQ1KE0#15LfLtJKUynP) and extract the images. They are not stored in this repository due to size constraints.

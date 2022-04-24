@@ -145,7 +145,8 @@ app/api/detect
 
 # large data files
 data/**/*.jpg
-data/models
+data/models/detectron2
+data/models/yolov5
 data/detected/*.jpg
 data/detected/*.txt
 data/*.zip
