@@ -1,5 +1,6 @@
-train: ../../data/models/yolov5/mosaic-contrast-x2/train/images
-val: ../../data/models/yolov5/mosaic-contrast-x2/valid/images
+train: ../../../data/models/yolov5/mosaic-contrast-x2/train/images
+val: ../../../data/models/yolov5/mosaic-contrast-x2/valid/images
+test: ../../../data/models/yolov5/mosaic-contrast-x2/test/images
 
 nc: 1
 names: ["litter"]

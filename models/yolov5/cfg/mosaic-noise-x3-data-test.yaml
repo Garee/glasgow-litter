@@ -1,5 +1,0 @@
-train: ../../../data/models/yolov5/mosaic-noise-x3/train/images
-val: ../../../data/models/yolov5/mosaic-noise-x3/test/images
-
-nc: 1
-names: ["litter"]

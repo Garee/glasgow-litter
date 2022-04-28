@@ -1,5 +1,0 @@
-train: ../../data/models/yolov5/train/images
-val: ../../data/models/yolov5/valid/images
-
-nc: 1
-names: ["litter"]

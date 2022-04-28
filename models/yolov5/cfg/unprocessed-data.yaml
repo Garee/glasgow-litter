@@ -1,5 +1,6 @@
-train: ../../data/models/yolov5/unprocessed/train/images
-val: ../../data/models/yolov5/unprocessed/valid/images
+train: ../../../data/models/yolov5/unprocessed/train/images
+val: ../../../data/models/yolov5/unprocessed/valid/images
+test: ../../../data/models/yolov5/unprocessed/test/images
 
 nc: 1
 names: ["litter"]
