@@ -6,6 +6,6 @@ statsmodels
 patsy
 scipy
 requests
-shapely
+Shapely
 python-dotenv
 plotly
