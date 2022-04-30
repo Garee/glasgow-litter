@@ -156,5 +156,5 @@ models/detectron2/runs
 # label studio
 data/label-studio/export
 
-# wandb
-models/yolov5/wandb
+# detection runs
+runs/
