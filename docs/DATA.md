@@ -82,18 +82,22 @@ This directory contains GeoJSON information about the wards and data zones withi
 
 ## [images](../data/images)
 
-This directory contains Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 640x640 pixel resolution, which is the maximum size the API offers.
+This directory contains 37,300 Google Street View JPEG images of Glasgow City which have been obtained using the Google Street View Static API. Each image has a 640x640 pixel resolution, which is the maximum size the API offers.
 
 Download this [zip file](https://drive.protonmail.com/urls/KAH7FQ1KE0#15LfLtJKUynP) and extract the images. They are not stored in this repository due to size constraints.
+
+### Small Example Data Set
+
+Download this [zip file](https://drive.protonmail.com/urls/7M6ZTWCX3R#IGBjeqYaFsw6) and extract the images. This subset contains only a single data zone and can be used to run the detection quickly.
 
 ## [models](../data/models)
 
 This directory contains the train/valid/test images for each attempted model.
 
-Download this [zip file](https://drive.protonmail.com/urls/KAH7FQ1KE0#15LfLtJKUynP) and extract it within the `models` directory. These are the images for the chosen YOLOv5s model and they are not stored in this repository due to size constraints.
+Download this [zip file](https://drive.protonmail.com/urls/FKVF43B258#uKy64JkipmgF) and extract it within the `models` directory. These are the images for the chosen YOLOv5s model and they are not stored in this repository due to size constraints.
 
 ## [detected](../data/detected)
 
 This directory contains the images and labels for detected litter.
 
-Download this [zip file](https://drive.protonmail.com/urls/KAH7FQ1KE0#15LfLtJKUynP) and extract the images. They are not stored in this repository due to size constraints.
+Download this [zip file](https://drive.protonmail.com/urls/MNBKVJWASM#rpItVAJAfMzB) and extract the images. They are not stored in this repository due to size constraints.
