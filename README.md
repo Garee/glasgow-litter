@@ -4,9 +4,11 @@ A research project that explores the relationships between deprivation and litte
 
 ![Glasgow's Litter](./images/glasgow-litter.png)
 
-## Objective
+## Objectives
 
-Identify the relationship, if any, between an area of Glasgow's deprivation and the amount of litter present on its streets.
+1. Identify the relationships between the key indicators of deprivation in areas of
+Glasgow City and the amount of litter on its streets.
+2. Discover if an automated approach to counting litter on a city scale could be achieved using deep learning object detection methods.
 
 ## Data
 
