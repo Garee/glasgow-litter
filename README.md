@@ -30,6 +30,14 @@ Similarly, the notebooks in the `models/detectron2` directory are used to train 
 
 The notebook in the `regression` directory applies count data regression models such as Poisson and Negative Binomial to the extended SIMD data set described in [DATA.md](docs/DATA.md).
 
+## Clone
+
+This repository contains two submodules as dependencies. Use the following command to clone this repository and the submodules it references:
+
+```bash
+git clone --recurse-submodules https://github.com/Garee/glasgow-litter.git
+```
+
 ## Dependencies
 
 1. [Python 3.9.6](https://www.python.org/downloads)
