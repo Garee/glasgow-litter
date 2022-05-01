@@ -73,7 +73,7 @@ More information can be found in the header comment of each script.
 
 ## Report
 
-The source code for the report can be found in the `report` directory. This is currently a work in progress.
+The source code for the report can be found in the `report` directory.
 
 ## Acknowledgements
 
