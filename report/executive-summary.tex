@@ -23,32 +23,32 @@
 This study aimed to identify the relationships between the key indicators of deprivation in areas of
 Glasgow City and the amount of litter on its streets. The ambition was to discover areas of focus that could
 reduce littering if improved. It was also of interest to discover if an automated approach to counting litter on
-a city scale could be achieved using deep learning object detection methods. Thus far, local organisations
+a city-scale could be achieved using deep learning object detection methods. Thus far, local organisations
 have had to perform manual audits to collect such data.
 
 \subsubsection*{Data}
 
-The Glasgow City subset of the Scottish Index of Multiple Deprivation (SIMD) data set provided relative measures of deprivation across many small areas of the city known as data zones. This data was combined with litter count data that had been quantified using an object detection model. Tens of thousands of street view images of Glasgow City were obtained from the Google Maps platform in order to train and infer from the object detection model. The location and details of Glasgow City's public recycling facilities were also collected and combined with the data.
+The Glasgow City subset of the Scottish Index of Multiple Deprivation (SIMD) data set provided relative measures of deprivation across many small areas of the city known as data zones. This data was combined with litter count data that had been quantified using an object detection model. Tens of thousands of street view images of Glasgow City were obtained from the Google Maps platform to train and infer from the object detection model. The location and details of Glasgow City's public recycling facilities were also collected and combined with the data.
 
 
 \subsubsection*{Methods}
 
-Assorted You Only Look Once (YOLO) and Faster Region-Based Convolutional Neural Network (Faster R-CNN) object detection models were developed using the Google street view images of Glasgow City. Image pre-processing, image augmentation, and hyperparameter tuning techniques were applied to find the model variation that performed best at detecting litter. The chosen model was applied to fifty street view images per data zone in order to produce a quantification of litter.
+Assorted You Only Look Once (YOLO) and Faster Region-Based Convolutional Neural Network (Faster R-CNN) object detection models were developed using the Google street view images of Glasgow City. Image pre-processing, image augmentation, and hyperparameter tuning techniques were applied to find the model variation that performed best at detecting litter. The chosen model was applied to fifty street view images per data zone to produce a quantification of litter.
 
-Count data regression was performed on the extended SIMD data set using Poisson and Negative Binomial models, with the objective of identifying potential relationships between deprivation and litter. The response variable was the number of litter objects detected within fifty street view images of a SIMD data zone. The potential explanatory variables were the key indicators of deprivation provided by the SIMD. Exploratory data analysis and forward stepwise variable selection were performed to determine the most promising explanatory variables.
+Count data regression was performed on the extended SIMD data set using Poisson and Negative Binomial models, to identify potential relationships between deprivation and litter. The response variable was the number of litter objects detected within fifty street view images of a SIMD data zone. The potential explanatory variables were the key indicators of deprivation provided by the SIMD. Exploratory data analysis and forward stepwise variable selection were performed to determine the most promising explanatory variables.
 
 \subsubsection*{Results}
 
 A YOLOv5s litter detection model that had been trained using mosaic and noise augmented image data was chosen as the final model as it produced the best mean average precision of 58.2. It was found that it may generalise well to new data as it produced a true positive rate of 77\% on an unseen test data set containing 254 litter objects, with only 28 false positives. When applied to 37,300 images of Glasgow City it found 7,732 litter objects within 746 data zones using a confidence threshold of 80\%.
 
-The Poisson regression model was found not to fit well to the data. Additional variance was accounted for by fitting a Negative Binomial model. This produced an adequate fit and suggested that there was a relationship between litter and the number of working age individuals with no qualifications. However, this could not be concluded after testing the variable selection hypothesis showed that the relationship was not statistically significant at a significance threshold of $\alpha = 0.05$.
+The Poisson regression model was found not to fit well to the data. The additional variance was accounted for by fitting a Negative Binomial model. This produced an adequate fit and suggested that there was a relationship between litter and the number of working-age individuals with no qualifications. However, this could not be concluded after testing the variable selection hypothesis showed that the relationship was not statistically significant at a significance threshold of $\alpha = 0.05$.
 
-A web application was developed and made publicly available at glasgow-litter.garyblackwood.co.uk to increase the accessibility of the results. Users are able to interactively explore the detected litter throughout the city and apply the model to their own uploaded images.
+A web application was developed and made publicly available at glasgow-litter.garyblackwood.co.uk to increase the accessibility of the results. Users can interactively explore the detected litter throughout the city and apply the model to their uploaded images.
 
 \subsubsection*{Recommendations and Conclusion}
 
-None of the potential explanatory deprivation indicators were statistically significant. For this reason, no single area of focus could be recommended to reduce littering. However, it was acknowledged that insights may be gained by removing certain limiting factors to improve the methods used. By using increased quantities of hardware resources and high resolution images over time, local organisation may be able to use the resulting insights to make informed policy decisions.
+None of the potential explanatory deprivation indicators were statistically significant. For this reason, no single area of focus could be recommended to reduce littering. However, it was acknowledged that insights may be gained by removing certain limiting factors to improve the methods used. By using increased quantities of hardware resources and high-resolution images over time, local organisations may be able to use the resulting insights to make informed policy decisions.
 
-The feasibility of using an automated approach to counting litter on a city scale was confirmed. By successfully applying object detection to 37,300 street view images, it was established that the approach has the potential to not only be scaled up within Glasgow City, but also over to other locations within Scotland.
+The feasibility of using an automated approach to counting litter on a city scale was confirmed. By successfully applying object detection to 37,300 street view images, it was established that the approach has the potential to not only be scaled up within Glasgow City but also over to other locations within Scotland.
     
 \end{document}
