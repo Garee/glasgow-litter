@@ -7,7 +7,7 @@ A research project that explores the relationships between deprivation and litte
 ## Objectives
 
 1. Identify the relationships between the key indicators of deprivation in areas of
-Glasgow City and the amount of litter on its streets.
+   Glasgow City and the amount of litter on its streets.
 2. Discover if an automated approach to counting litter on a city scale could be achieved using deep learning object detection methods.
 
 ## Data
@@ -35,7 +35,11 @@ The notebook in the `regression` directory applies count data regression models 
 This repository contains two submodules as dependencies. Use the following command to clone this repository and the submodules it references:
 
 ```bash
+# If you're cloning for the first time.
 git clone --recurse-submodules https://github.com/Garee/glasgow-litter.git
+
+# If you have already cloned the repository.
+git submodule update --init --recursive
 ```
 
 ## Dependencies
@@ -52,11 +56,11 @@ python -m venv venv
 # Activate the virtual environment
 source venv/Scripts/activate # source venv/bin/activate # linux/macOS
 
-# Install PyTorch (requires CUDA Toolkit 11.3)
-pip install torch torchvision torchaudio --extra-index-url https://download.pytorch.org/whl/cu113
-
-# Install remaining dependencies
+# Install dependencies
 pip install -r requirements.txt
+
+# If you want to use yolov5
+pip install -r models/yolov5/yolov5/requirements.txt
 ```
 
 Open the object detection and regression notebooks in [Visual Studio Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks) or [JupyterLab](https://jupyter.org/install).
