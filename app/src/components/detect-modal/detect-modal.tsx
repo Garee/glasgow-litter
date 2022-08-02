@@ -17,6 +17,7 @@ import {
   SliderTrack,
   Stack,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { FC, useRef, useState } from "react";
 
@@ -26,6 +27,7 @@ export interface DetectModalProps {
 }
 
 export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
+  const toast = useToast();
   const [loading, setLoading] = useState(false);
   const [canDetect, setCanDetect] = useState(true);
   const [confidence, setConfidence] = useState(0.25);
@@ -72,7 +74,19 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.blob())
+      .then((res) => {
+        if (!res.ok) {
+          toast({
+            title: "Uh oh! Something went wrong. Please try again.",
+            status: "error",
+            position: "top",
+            isClosable: false
+          });
+          Promise.reject();
+        }
+
+        return res.blob();
+      })
       .then((blob) => {
         if (image.current) {
           const imgSrc = URL.createObjectURL(blob);
