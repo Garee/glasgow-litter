@@ -1,4 +1,8 @@
 import {
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
   Box,
   Button,
   Center,
@@ -17,7 +21,7 @@ import {
   SliderTrack,
   Stack,
   Text,
-  useToast,
+  useToast
 } from "@chakra-ui/react";
 import React, { FC, useRef, useState } from "react";
 
@@ -29,7 +33,7 @@ export interface DetectModalProps {
 export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
   const toast = useToast();
   const [loading, setLoading] = useState(false);
-  const [canDetect, setCanDetect] = useState(true);
+  const [canDetect, setCanDetect] = useState(false);
   const [confidence, setConfidence] = useState(0.25);
   const [hideConfidence, setHideConfidence] = useState(false);
   const [hideLabels, setHideLabels] = useState(true);
@@ -163,6 +167,10 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
         <ModalCloseButton />
         <ModalBody>
           <Stack>
+            <Alert status='warning'>
+              <AlertIcon />
+              <AlertDescription>This feature is currently disabled to minimise server load.</AlertDescription>
+            </Alert>
             <Text>
               Try out the litter detection model by uploading your own image or
               using the sample below.
@@ -224,7 +232,7 @@ export const DetectModal: FC<DetectModalProps> = ({ isOpen, onClose }) => {
           >
             Detect
           </Button>
-          <Button onClick={onUpload} mr={3}>
+          <Button onClick={onUpload} isDisabled mr={3}>
             Upload
           </Button>
           <input
