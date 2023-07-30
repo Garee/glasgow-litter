@@ -85,7 +85,7 @@ def main():
     as JSON to file.
     """
     args = parse_args()
-    res = requests.get(MAP_QUERY_URL, PARAMS, headers=HEADERS)
+    res = requests.get(MAP_QUERY_URL, PARAMS, headers=HEADERS, timeout=60000)
     if res.status_code == HTTP_STATUS_OK:
         with open(args.out_path, "w", encoding="utf8") as file:
             file.write(json.dumps(res.json(), indent=2))

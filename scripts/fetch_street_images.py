@@ -107,7 +107,7 @@ def download_image(image):
         "return_error_code": "true",
         "key": API_KEY,
     }
-    res = requests.get(API_URL, params)
+    res = requests.get(API_URL, params, timeout=60000)
     if res.status_code == HTTP_STATUS_OK:
         with open(Path(image["path"]), "wb") as file:
             file.write(res.content)

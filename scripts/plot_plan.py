@@ -1,3 +1,5 @@
+# pylint: disable=use-dict-literal
+
 """
 This script produces a Gantt chart that illustrates the project plan.
 """
