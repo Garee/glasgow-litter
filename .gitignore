@@ -147,7 +147,7 @@ app/api/detect
 data/**/*.jpg
 data/models/detectron2
 data/models/yolov5
-data/detected/*.jpg
+!data/detected/*.jpg
 data/detected/*.txt
 data/*.zip
 data/mosaic*
