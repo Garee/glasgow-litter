@@ -45,8 +45,9 @@
   },
   "scripts": {
     "build": "node app/build.js",
-    "build:prod": "cross-env NODE_ENV=production npm run build",
+    "build:prod": "cross-env NODE_ENV=production npm run build && npm run copy:data-detected",
     "clean": "rm -rf build",
+    "copy:data-detected": "cp -r ./data/detected ./build",
     "dev": "concurrently --kill-others \"npm run build\" \"npm run tsc:watch\" \"npm run sync\"",
     "format": "prettier --write app/*.js app/src/*.{tsx,html} && black .",
     "lint": "npm run lint:py && npm run lint:app",
