@@ -47,7 +47,7 @@
     "build": "node app/build.js",
     "build:prod": "cross-env NODE_ENV=production npm run build && npm run copy:data-detected",
     "clean": "rm -rf build",
-    "copy:data-detected": "mkdir ./build/data/detected && cp -r ./data/detected ./build/data/detected",
+    "copy:data-detected": "mkdir -p ./build/data/detected && cp -r ./data/detected ./build/data/detected",
     "dev": "concurrently --kill-others \"npm run build\" \"npm run tsc:watch\" \"npm run sync\"",
     "format": "prettier --write app/*.js app/src/*.{tsx,html} && black .",
     "lint": "npm run lint:py && npm run lint:app",
